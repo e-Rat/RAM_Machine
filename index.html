@@ -9,21 +9,125 @@
 <body>
     <aside>
         <div id="Processor">
-            Processor
+            <h3>Processor</h3>
+            <label for="instruction">Instruction</label>
+ 
+            <input type="number" name="instruction" id="instruction">
+            <label for="Argument">Argument</label>
+ 
+            <input type="number" name="Argument" id="Argument">
         </div>
         <div id="Memory">
-            Memory
+       
+            <table>
+                <tr>
+                    <th><h3>Memory</h3></th>
+                </tr>
+                <tr>
+                    <th><h3>Adress</h3></th>
+                    <th><h3>Value</h3></th>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td><input type="number" name="" id=""></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><input type="number" name="" id=""></td>
+                </tr>
+            </table>
         </div>
     </aside>
     <main>
         <div id="Input">
-            Input
+            <h3>Input</h3>
+            <table>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td><input type="number" name="" id=""></td>
+                    <td><input type="number" name="" id=""></td>
+                    <td><input type="number" name="" id=""></td>
+                </tr>
+            </table>
         </div>
         <div id="Program">
-            Program
+            <button>Run</button>
+            <button>Step</button>
+            <button>Reset</button>
+            <button>Upload Program</button>
+            <button>Download Program</button>
+            <table>
+                <tr>
+                    <th><h3>Program</h3></th>
+                </tr>
+                <tr>
+                    <th>LN</th>
+                    <th>Label</th>
+                    <th>Instruction</th>
+                    <th>Argument</th>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td><input type="text" name="" id=""></td>
+                    <td>
+                        <select name="" id="">
+                            <option value="STORE">STORE</option>
+                            <option value="LOAD">LOAD </option>
+                            <option value="READ">READ</option>
+                            <option value="WRITE">WRITE</option>
+                            <option value="ADD">ADD</option>
+                            <option value="SUB">SUB</option>
+                            <option value="MULT">MULT</option>
+                            <option value="DIV">DIV</option>
+                            <option value="JUMP">JUMP</option>
+                            <option value="JZERO">JZERO</option>
+                            <option value="JGTZ">JGTZ</option>
+                            <option value="HALT">HALT</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="" id=""></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><input type="text" name="" id=""></td>
+                    <td>
+                        <select name="" id="">
+                            <option value="STORE">STORE</option>
+                            <option value="LOAD">LOAD </option>
+                            <option value="READ">READ</option>
+                            <option value="WRITE">WRITE</option>
+                            <option value="ADD">ADD</option>
+                            <option value="SUB">SUB</option>
+                            <option value="MULT">MULT</option>
+                            <option value="DIV">DIV</option>
+                            <option value="JUMP">JUMP</option>
+                            <option value="JZERO">JZERO</option>
+                            <option value="JGTZ">JGTZ</option>
+                            <option value="HALT">HALT</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="" id=""></td>
+                </tr>
+            </table>
         </div>
         <div id="Output">
-            Output
+            <h3>Output</h3>
+            <table>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td><input type="number" name="" id=""></td>
+                    <td><input type="number" name="" id=""></td>
+                    <td><input type="number" name="" id=""></td>
+                </tr>
+            </table>
         </div>
     </main>
 </body>
