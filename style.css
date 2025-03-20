@@ -20,6 +20,9 @@ aside{
     height: 95vh;
     background-color: var(--primary-color);
     padding: var(--padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 #Processor{
     width: 90%;
@@ -28,9 +31,21 @@ aside{
     margin: var(--margin-mini);
     border: 1px solid var(--text-color);
 }
+#Processor h3{
+    text-align: center;
+    margin: var(--margin);
+}
+#Processor label{
+    float: left;
+    margin: var(--margin-mini);
+}
+#Processor input{
+    float: right;
+    margin: var(--margin-mini);
+}
 #Memory{
     width: 90%;
-    height: 60%;
+    height: 70%;
     padding: var(--padding);
     margin: var(--margin-mini);
     border: 1px solid var(--text-color);
@@ -40,7 +55,9 @@ main{
     height: 95vh;
     background-color: var(--primary-color);
     padding: var(--padding);
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 #Input{
     width: 90%;
