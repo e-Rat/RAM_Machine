@@ -101,7 +101,7 @@ function addRow() {
 }
 
 function runStep(){
-    alert("Running step. Check console");
+    alert("Running step. Check console.");
     const row = document.getElementById(currentRow);
     var label = row.cells[2].querySelector("input").value;
     var instruction = row.cells[3].querySelector("select").value;
