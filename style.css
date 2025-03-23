@@ -10,6 +10,7 @@
 *{
     margin: 0;
     color: var(--text-color);
+    scrollbar-color: var(--text-color) var(--primary-color);
 }
 body{
     display: flex;
@@ -49,6 +50,8 @@ aside{
     padding: var(--padding);
     margin: var(--margin-mini);
     border: 1px solid var(--text-color);
+    overflow: auto; /* Add this */
+    position: relative; /* Add this */
 }
 main{
     width: 60%;
@@ -72,6 +75,8 @@ main{
     padding: var(--padding);
     margin: var(--margin-mini);
     border: 1px solid var(--text-color);
+    overflow-y: auto;
+    position: relative;
 }
 #Output{
     width: 90%;

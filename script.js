@@ -1,10 +1,12 @@
-document.addEventListener("DOMContentLoaded", addBtn);
+document.addEventListener("DOMContentLoaded", addBtnProgram);
+document.addEventListener("DOMContentLoaded", addBtnMemory);
 document.addEventListener("DOMContentLoaded", addArrow);
 document.addEventListener("DOMContentLoaded", addArrowFunction);
 
-var currentRow = "row0";
+var programCurrentRow = "programRow0";
+var memoryCurrentRow = "memoryRow0";
 
-function addBtn() {
+function addBtnProgram() {
     const programTable = document.getElementById("ProgramTable");
     const rows = programTable.querySelectorAll("tr");
 
@@ -21,16 +23,36 @@ function addBtn() {
         const addBtn = document.createElement("button");
         addBtn.textContent = "+";
         lastCell.appendChild(addBtn);
-        addBtn.addEventListener("click", addRow);
+        addBtn.addEventListener("click", addRowProgram);
+    }
+}
+function addBtnMemory(){
+    const memoryTable = document.getElementById("MemoryTable");
+    const rows = memoryTable.querySelectorAll("tr");
+
+    for (let i = 2; i < rows.length - 1; i++) {
+        let cells = rows[i].querySelectorAll("td");
+        let lastCell = cells[cells.length - 1];
+        lastCell.style.display = "none";
+    }
+
+    let lastRow = rows[rows.length - 1];
+    let lastCell = lastRow.querySelector("td:last-child");
+
+    if (!lastCell.querySelector("button")) {
+        const addBtn = document.createElement("button");
+        addBtn.textContent = "+";
+        lastCell.appendChild(addBtn);
+        addBtn.addEventListener("click", addRowMemory);
     }
 }
 
 function addArrow(){
-    const row = document.getElementById(currentRow);
+    const row = document.getElementById(programCurrentRow);
     row.cells[0].textContent = "⇒";
 }
 
-const progTable = document.getElementById("ProgramTable");
+const programTable = document.getElementById("ProgramTable");
 
 function changeCurrentRow(event) {
     if (event.target.tagName === "BUTTON" || event.target.tagName === "INPUT" || event.target.tagName === "SELECT") {
@@ -39,8 +61,8 @@ function changeCurrentRow(event) {
 
     const clickedRow = event.currentTarget;
 
-    for (let i = 2; i < progTable.rows.length; i++) {
-        let firstCell = progTable.rows[i].cells[0];
+    for (let i = 2; i < programTable.rows.length; i++) {
+        let firstCell = programTable.rows[i].cells[0];
         if (firstCell) {
             firstCell.textContent = "";
         }
@@ -51,19 +73,19 @@ function changeCurrentRow(event) {
 }
 
 function addArrowFunction(){
-    for(let i = 2; i < progTable.rows.length; i++){
-        progTable.rows[i].addEventListener("click", (event) => changeCurrentRow(event));
+    for(let i = 2; i < programTable.rows.length; i++){
+        programTable.rows[i].addEventListener("click", (event) => changeCurrentRow(event));
     }
 }
 
-function addRow() {
+function addRowProgram() {
     const programTable = document.getElementById("ProgramTable");
     const tbody = programTable.querySelector("tbody");
     const rows = tbody.querySelectorAll("tr");
     let rowNum = rows.length - 2;
 
     const newRow = document.createElement("tr");
-    newRow.id = "row" + rowNum;
+    newRow.id = "programRow" + rowNum;
 
     const arrowCell = document.createElement("td");
     arrowCell.textContent = "";
@@ -96,8 +118,35 @@ function addRow() {
     newRow.appendChild(emptyCell);
 
     tbody.appendChild(newRow);
-    addBtn();
+    addBtnProgram();
     addArrowFunction();
+}
+
+function addRowMemory(){
+    const memoryTable = document.getElementById("MemoryTable");
+    const tbody = memoryTable.querySelector("tbody");
+    const rows = tbody.querySelectorAll("tr");
+    let rowNum = rows.length - 2;
+
+    const newRow = document.createElement("tr");
+    newRow.id = "memoryRow" + rowNum;
+
+    const numCell = document.createElement("td");
+    numCell.innerText = rowNum;
+
+    const valueCell = document.createElement("td");
+    const input = document.createElement("input");
+    input.type = 'number';
+    valueCell.appendChild(input);
+
+    const btnCell = document.createElement("td");
+
+    newRow.appendChild(numCell);
+    newRow.appendChild(valueCell);
+    newRow.appendChild(btnCell);
+
+    tbody.appendChild(newRow);
+    addBtnMemory();
 }
 
 function runStep(){
