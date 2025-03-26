@@ -151,9 +151,16 @@ function addRowMemory(){
 
 function runStep(){
     alert("Running step. Check console.");
-    const row = document.getElementById(currentRow);
+    const row = document.getElementById(programCurrentRow);
     var label = row.cells[2].querySelector("input").value;
     var instruction = row.cells[3].querySelector("select").value;
     var argument = row.cells[4].querySelector("input").value;
     console.log(label + " " + instruction + " " + argument);
+
+    const instructionFunction = Functions[instruction];
+    if (instructionFunction) {
+        instructionFunction();
+    } else {
+        console.error("Unknown instruction: " + instruction);
+    }
 }
