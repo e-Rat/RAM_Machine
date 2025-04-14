@@ -70,6 +70,8 @@ function changeCurrentRow(event) {
 
     clickedRow.cells[0].textContent = "⇒";
     currentRow = clickedRow.id;
+    console.log(currentRow);
+    programCurrentRow = currentRow;
 }
 
 function addArrowFunction(){

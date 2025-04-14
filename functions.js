@@ -1,6 +1,24 @@
 var Functions = {
     LOAD: function() {
         console.log("LOAD");
+        const memoryTable = document.getElementById("MemoryTable");
+        const tbody = memoryTable.querySelector("tbody");
+        const rows = tbody.querySelectorAll("tr");
+        let rowNum = rows.length - 3;
+        console.log(rowNum);
+        let label = document.getElementById("programRow" + rowNum);
+        
+        if (label) {
+            const inputs = Array.from(label.querySelectorAll("input"));
+    
+            inputs.forEach(input => {
+                console.log(input.value);
+            });
+        } else {
+            console.log("Brak wiersza o id 'programRow" + rowNum + "'");
+        }
+        
+                
     },
     STORE: function() {
         console.log("STORE");
