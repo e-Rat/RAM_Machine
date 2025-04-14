@@ -11,70 +11,76 @@
         <div id="Processor">
             <h3>Processor</h3>
             <label for="instruction">Instruction</label>
- 
             <input type="number" name="instruction" id="instruction">
+            
             <label for="Argument">Argument</label>
- 
             <input type="number" name="Argument" id="Argument">
         </div>
         <div id="Memory">
-       
-            <table>
+            <table id="MemoryTable">
                 <tr>
-                    <th><h3>Memory</h3></th>
+                    <th colspan="3"><h3>Memory</h3></th>
                 </tr>
                 <tr>
-                    <th><h3>Adress</h3></th>
-                    <th><h3>Value</h3></th>
+                    <td>Adress</td>
+                    <td>Value</td>
+                    <td></td>
                 </tr>
-                <tr>
+                <tr id="memoryRow0">
                     <td>0</td>
-                    <td><input type="number" name="" id=""></td>
+                    <td><input type="number"></td>
+                    <td></td>
                 </tr>
-                <tr>
+                <tr id="memoryRow1">
                     <td>1</td>
-                    <td><input type="number" name="" id=""></td>
+                    <td><input type="number"></td>
+                    <td></td>
                 </tr>
             </table>
         </div>
     </aside>
     <main>
         <div id="Input">
-            <h3>Input</h3>
             <table>
+                <tr>
+                    <th colspan="3">Input</th>
+                </tr>
                 <tr>
                     <td>1</td>
                     <td>2</td>
                     <td>3</td>
                 </tr>
                 <tr>
-                    <td><input type="number" name="" id=""></td>
-                    <td><input type="number" name="" id=""></td>
-                    <td><input type="number" name="" id=""></td>
+                    <td><input type="number" id="input1"></td>
+                    <td><input type="number" id="input2"></td>
+                    <td><input type="number" id="input3"></td>
                 </tr>
             </table>
         </div>
         <div id="Program">
             <button>Run</button>
-            <button>Step</button>
+            <button onclick="runStep()">Step</button>
             <button>Reset</button>
             <button>Upload Program</button>
-            <button>Download Program</button>
-            <table>
+            <button >Download Program</button>
+            <table id="ProgramTable">
                 <tr>
-                    <th><h3>Program</h3></th>
+                    <th colspan="6">Program</th>
                 </tr>
                 <tr>
-                    <th>LN</th>
-                    <th>Label</th>
-                    <th>Instruction</th>
-                    <th>Argument</th>
+                    <td></td>
+                    <td>LN</td>
+                    <td>Label</td>
+                    <td>Instruction</td>
+                    <td>Argument</td>
+                    <td></td>
                 </tr>
-                <tr>
+                <tr id="programRow0">
+                    <td></td>
                     <td>0</td>
-                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text"></td>
                     <td>
-                        <select name="" id="">
+                        <select id="instruction0">
                             <option value="STORE">STORE</option>
                             <option value="LOAD">LOAD </option>
                             <option value="READ">READ</option>
@@ -89,13 +95,15 @@
                             <option value="HALT">HALT</option>
                         </select>
                     </td>
-                    <td><input type="number" name="" id=""></td>
+                    <td><input type="text"></td>
+                    <td></td>
                 </tr>
-                <tr>
+                <tr id="programRow1">
+                    <td></td>
                     <td>1</td>
-                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text"></td>
                     <td>
-                        <select name="" id="">
+                        <select>
                             <option value="STORE">STORE</option>
                             <option value="LOAD">LOAD </option>
                             <option value="READ">READ</option>
@@ -110,25 +118,31 @@
                             <option value="HALT">HALT</option>
                         </select>
                     </td>
-                    <td><input type="number" name="" id=""></td>
+                    <td><input type="text"></td>
+                    <td></td>
                 </tr>
+                
             </table>
         </div>
         <div id="Output">
-            <h3>Output</h3>
             <table>
+                <tr>
+                    <th colspan="3">Output</th>
+                </tr>
                 <tr>
                     <td>1</td>
                     <td>2</td>
                     <td>3</td>
                 </tr>
                 <tr>
-                    <td><input type="number" name="" id=""></td>
-                    <td><input type="number" name="" id=""></td>
-                    <td><input type="number" name="" id=""></td>
+                    <td><input type="number" id="output1"></td>
+                    <td><input type="number" id="output2"></td>
+                    <td><input type="number" id="output3"></td>
                 </tr>
             </table>
         </div>
     </main>
+    <script src="functions.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

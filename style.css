@@ -4,12 +4,13 @@
     --text-color:#00FF00;
     --padding:1.5rem;
     --margin:0.5rem;
-    --margin-mini:0.3rem;
+    --margin-mini:0.25rem;
     --border-radius:0.5rem;
 }
 *{
     margin: 0;
     color: var(--text-color);
+    scrollbar-color: var(--text-color) var(--primary-color);
 }
 body{
     display: flex;
@@ -20,6 +21,9 @@ aside{
     height: 95vh;
     background-color: var(--primary-color);
     padding: var(--padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 #Processor{
     width: 90%;
@@ -28,19 +32,35 @@ aside{
     margin: var(--margin-mini);
     border: 1px solid var(--text-color);
 }
+#Processor h3{
+    text-align: center;
+    margin: var(--margin);
+}
+#Processor label{
+    float: left;
+    margin: var(--margin-mini);
+}
+#Processor input{
+    float: right;
+    margin: var(--margin-mini);
+}
 #Memory{
     width: 90%;
-    height: 60%;
+    height: 70%;
     padding: var(--padding);
     margin: var(--margin-mini);
     border: 1px solid var(--text-color);
+    overflow: auto; /* Add this */
+    position: relative; /* Add this */
 }
 main{
     width: 60%;
     height: 95vh;
     background-color: var(--primary-color);
     padding: var(--padding);
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 #Input{
     width: 90%;
@@ -55,6 +75,8 @@ main{
     padding: var(--padding);
     margin: var(--margin-mini);
     border: 1px solid var(--text-color);
+    overflow-y: auto;
+    position: relative;
 }
 #Output{
     width: 90%;
