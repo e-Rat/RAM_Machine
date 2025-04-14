@@ -17,7 +17,8 @@ var Functions = {
         } else {
             console.log("Brak wiersza o id 'programRow" + rowNum + "'");
         }
-        
+        // Do Strzelby
+        // nie musisz tego wszystkiego znowu tu wpisaywac to w js mozna koszystac ze zmiennych w innym pliku
                 
     },
     STORE: function() {
@@ -27,7 +28,15 @@ var Functions = {
         console.log("READ");
     },
     WRITE: function() {
-        console.log("WRITE");
+        var programRow = document.getElementById(programCurrentRow);
+        var argument = programRow.cells[4].querySelector("input").value;
+        console.log(argument);
+
+        var memoryRow = document.getElementById("memoryRow" + argument);
+        var memoryValue = memoryRow.cells[1].querySelector("input").value;
+
+        var output = document.getElementById("output1");
+        output.value = memoryValue;
     },
     ADD: function() {
         console.log("ADD");
