@@ -35,8 +35,9 @@ var Functions = {
         var memoryRow = document.getElementById("memoryRow" + argument);
         var memoryValue = memoryRow.cells[1].querySelector("input").value;
 
-        var output = document.getElementById("output1");
-        output.value = memoryValue;
+        //var output = document.getElementById("output1");
+        //output.value = memoryValue;
+        animateInputToMemory(memoryRow.id, memoryValue, "output1");
     },
     ADD: function() {
         console.log("ADD");

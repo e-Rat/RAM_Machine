@@ -11,6 +11,7 @@
     margin: 0;
     color: var(--text-color);
     scrollbar-color: var(--text-color) var(--primary-color);
+    font-family: "Courier New", monospace;
 }
 body{
     display: flex;
