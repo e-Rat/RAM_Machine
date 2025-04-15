@@ -19,13 +19,25 @@ var Functions = {
         }
         // Do Strzelby
         // nie musisz tego wszystkiego znowu tu wpisaywac to w js mozna koszystac ze zmiennych w innym pliku
-                
     },
     STORE: function() {
         console.log("STORE");
+        var akumulatorRow = document.getElementById("memoryRow0");
+        var akumulatorValue = akumulatorRow.cells[1].querySelector("input").value;
+
+        var programRow = document.getElementById(programCurrentRow);
+        var argument = programRow.cells[4].querySelector("input").value;
+
+        var memoryRow = document.getElementById("memoryRow" + argument);
+        memoryRow.cells[1].querySelector("input").value = akumulatorValue;
     },
     READ: function() {
         console.log("READ");
+        var argument = document.getElementById(programCurrentRow).cells[4].querySelector("input").value;
+        var input = document.getElementById("input" + argument).value;
+        var akumulatorRow = document.getElementById("memoryRow0");
+        akumulatorRow.cells[1].querySelector("input").value = input;
+
     },
     WRITE: function() {
         var programRow = document.getElementById(programCurrentRow);
