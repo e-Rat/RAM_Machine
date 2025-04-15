@@ -1,26 +1,26 @@
 var Functions = {
     LOAD: function() {
         console.log("LOAD");
-        const memoryTable = document.getElementById("MemoryTable");
+    
+        const memoryTable = document.getElementById("ProgramTable");
         const tbody = memoryTable.querySelector("tbody");
         const rows = tbody.querySelectorAll("tr");
-        let rowNum = rows.length - 3;
-        console.log(rowNum);
-        let label = document.getElementById("programRow" + rowNum);
-        
-        if (label) {
-            const inputs = Array.from(label.querySelectorAll("input"));
     
-            inputs.forEach(input => {
-                console.log(input.value);
-            });
-        } else {
-            console.log("Brak wiersza o id 'programRow" + rowNum + "'");
-        }
-        // Do Strzelby
-        // nie musisz tego wszystkiego znowu tu wpisaywac to w js mozna koszystac ze zmiennych w innym pliku
-                
+        let rowNum = rows.length - 4;
+        let argumentCell = document.getElementById("programRow" + rowNum);
+        var inputs = argumentCell.querySelectorAll('input');
+        
+        var secondInput = inputs[1]; 
+        let argument = document.getElementById("memoryRow" + secondInput.value);
+
+        const argumentInput = argument.querySelector("input");
+ 
+    
+        const input = document.getElementById("input1");
+            
+        argumentInput.value = input.value;
     },
+    
     STORE: function() {
         console.log("STORE");
     },
@@ -34,7 +34,6 @@ var Functions = {
 
         var memoryRow = document.getElementById("memoryRow" + argument);
         var memoryValue = memoryRow.cells[1].querySelector("input").value;
-
         //var output = document.getElementById("output1");
         //output.value = memoryValue;
         animateInputToMemory(memoryRow.id, memoryValue, "output1");
