@@ -1,6 +1,6 @@
 
 var Functions = {
-    LOAD: function() {
+    LOAD: function() { //Bartek
         console.log("LOAD");
         var programRow = document.getElementById(programCurrentRow);
         var argument = programRow.cells[4].querySelector("input").value;
@@ -12,9 +12,27 @@ var Functions = {
 
         const argument0 = rows1[0];
         argument0.value = argumentInput.value;
+
     },
-    STORE: function() {
+    STORE: function() { //Eryk
         console.log("STORE");
+        var akumulatorRow = document.getElementById("memoryRow0");
+        var akumulatorValue = akumulatorRow.cells[1].querySelector("input").value;
+        if(!akumulatorValue) {
+            alert("Wartosc musi byc ustalona");
+            return;
+        }
+        else{
+            var programRow = document.getElementById(programCurrentRow);
+            var instrucion = programRow.cells[3].querySelector("select").value;
+            var argument = programRow.cells[4].querySelector("input").value;
+    
+            document.getElementById("Instruction").value = instrucion;
+            document.getElementById("Argument").value = argument;
+    
+            var memoryRow = document.getElementById("memoryRow" + argument);
+            memoryRow.cells[1].querySelector("input").value = akumulatorValue;
+        }
     },
     READ: function() {
         console.log("READ");
@@ -27,10 +45,14 @@ var Functions = {
             
         argumentInput.value = input.value;
     },
-    WRITE: function() {
+    WRITE: function() { //Eryk
         var programRow = document.getElementById(programCurrentRow);
+        var instrucion = programRow.cells[3].querySelector("select").value;
         var argument = programRow.cells[4].querySelector("input").value;
         console.log(argument);
+
+        document.getElementById("Instruction").value = instrucion;
+        document.getElementById("Argument").value = argument;
 
         var memoryRow = document.getElementById("memoryRow" + argument);
         var memoryValue = memoryRow.cells[1].querySelector("input").value;
@@ -38,28 +60,54 @@ var Functions = {
         //output.value = memoryValue;
         animateInputToMemory(memoryRow.id, memoryValue, "output1");
     },
-    ADD: function() {
+    ADD: function() { //Bartek
         console.log("ADD");
     },
-    SUB: function() {
+    SUB: function() { //Eryk
         console.log("SUB");
+        var programRow = document.getElementById(programCurrentRow);
+        var instrucion = programRow.cells[3].querySelector("select").value;
+        var argument = programRow.cells[4].querySelector("input").value;
+        console.log(argument);
+
+        document.getElementById("Instruction").value = instrucion;
+        document.getElementById("Argument").value = argument;
+
+        var memoryRow = document.getElementById("memoryRow" + argument);
+        var memoryValue = memoryRow.cells[1].querySelector("input").value;
+
+        var akumulatorRow = document.getElementById("memoryRow0");
+        akumulatorRow.cells[1].querySelector("input").value -= memoryValue;
     },
-    MULT: function() {
+    MULT: function() { //Bartek
         console.log("MULT");
     },
-    DIV: function() {
+    DIV: function() { //Eryk
         console.log("DIV");
+        var programRow = document.getElementById(programCurrentRow);
+        var instrucion = programRow.cells[3].querySelector("select").value;
+        var argument = programRow.cells[4].querySelector("input").value;
+        console.log(argument);
+
+        document.getElementById("Instruction").value = instrucion;
+        document.getElementById("Argument").value = argument;
+
+        var memoryRow = document.getElementById("memoryRow" + argument);
+        var memoryValue = memoryRow.cells[1].querySelector("input").value;
+
+        var akumulatorRow = document.getElementById("memoryRow0");
+        akumulatorRow.cells[1].querySelector("input").value /= memoryValue;
     },
-    JUMP: function() {
+    JUMP: function() { //Bartek
         console.log("JUMP");
     },
-    JZERO: function() {
+    JZERO: function() { //Eryk
         console.log("JZERO");
     },
-    JGTZ: function() {
+    JGTZ: function() { //Eryk
         console.log("JGTZ");
     },
-    HALT: function() {
+    HALT: function() { //Bartek
         console.log("HALT");
     }
 };
