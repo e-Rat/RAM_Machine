@@ -1,31 +1,31 @@
+
 var Functions = {
     LOAD: function() {
         console.log("LOAD");
-    
-        const memoryTable = document.getElementById("ProgramTable");
-        const tbody = memoryTable.querySelector("tbody");
-        const rows = tbody.querySelectorAll("tr");
-    
-        let rowNum = rows.length - 4;
-        let argumentCell = document.getElementById("programRow" + rowNum);
-        var inputs = argumentCell.querySelectorAll('input');
-        
-        var secondInput = inputs[1]; 
-        let argument = document.getElementById("memoryRow" + secondInput.value);
+        var programRow = document.getElementById(programCurrentRow);
+        var argument = programRow.cells[4].querySelector("input").value;
+        let argument1 = document.getElementById("memoryRow" + argument);
 
-        const argumentInput = argument.querySelector("input");
- 
-    
-        const input = document.getElementById("input1");
-            
-        argumentInput.value = input.value;
+        const argumentInput = argument1.querySelector("input");
+        let memoryTable1 = document.getElementById("MemoryTable");
+        const rows1 = memoryTable1.querySelectorAll("input");
+
+        const argument0 = rows1[0];
+        argument0.value = argumentInput.value;
     },
-    
     STORE: function() {
         console.log("STORE");
     },
     READ: function() {
         console.log("READ");
+        var programRow = document.getElementById(programCurrentRow);
+        var argument = programRow.cells[4].querySelector("input").value;
+        let argument1 = document.getElementById("memoryRow" + argument);
+
+        const argumentInput = argument1.querySelector("input");
+        const input = document.getElementById("input1");
+            
+        argumentInput.value = input.value;
     },
     WRITE: function() {
         var programRow = document.getElementById(programCurrentRow);
