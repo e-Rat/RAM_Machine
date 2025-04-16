@@ -1,4 +1,4 @@
-function animateInputToMemory(sourceInputId, sourceInputValue, targetInputId) {
+function Animation(sourceInputId, sourceInputValue, targetInputId) {
     const sourceInput = document.getElementById(sourceInputId);
     const targetInput = document.getElementById(targetInputId);
 
