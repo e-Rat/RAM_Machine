@@ -1,4 +1,3 @@
-
 var Functions = {
     LOAD: function() { //Bartek
         console.log("LOAD");
@@ -17,21 +16,27 @@ var Functions = {
     STORE: function() { //Eryk
         console.log("STORE");
         var akumulatorRow = document.getElementById("memoryRow0");
-        var akumulatorValue = akumulatorRow.cells[1].querySelector("input").value;
+        var akumulatorInput = akumulatorRow.cells[1].querySelector("input");
+        var akumulatorValue = akumulatorInput.value;
         if(!akumulatorValue) {
             alert("Wartosc musi byc ustalona");
             return;
         }
         else{
             var programRow = document.getElementById(programCurrentRow);
-            var instrucion = programRow.cells[3].querySelector("select").value;
-            var argument = programRow.cells[4].querySelector("input").value;
+            var instruction = programRow.cells[3].querySelector("select");
+            var instructionValue = instruction.value;
+            var argument = programRow.cells[4].querySelector("input");
+            var argumetnValue = argument.value;
     
-            document.getElementById("Instruction").value = instrucion;
-            document.getElementById("Argument").value = argument;
+            var instructionProcessor = document.getElementById("Instruction");
+            var argumentProcessor = document.getElementById("Argument");
+            Animation(instruction.id, instructionValue, instructionProcessor.id);
+            Animation(argument.id, argumetnValue, argumentProcessor.id);
     
-            var memoryRow = document.getElementById("memoryRow" + argument);
-            memoryRow.cells[1].querySelector("input").value = akumulatorValue;
+            var memoryInput = document.getElementById("memory" + argumetnValue);
+
+            Animation(akumulatorInput.id, akumulatorValue, memoryInput.id);
         }
     },
     READ: function() {
@@ -47,18 +52,20 @@ var Functions = {
     },
     WRITE: function() { //Eryk
         var programRow = document.getElementById(programCurrentRow);
-        var instrucion = programRow.cells[3].querySelector("select").value;
-        var argument = programRow.cells[4].querySelector("input").value;
-        console.log(argument);
+        var instruction = programRow.cells[3].querySelector("select");
+        var instructionValue = instruction.value;
+        var argument = programRow.cells[4].querySelector("input");
+        var argumentValue = argument.value;
 
-        document.getElementById("Instruction").value = instrucion;
-        document.getElementById("Argument").value = argument;
+        var instructionProcessor = document.getElementById("Instruction");
+        var argumentProcessor = document.getElementById("Argument");
+        Animation(instruction.id, instructionValue, instructionProcessor.id);
+        Animation(argument.id, argumentValue, argumentProcessor.id);
 
-        var memoryRow = document.getElementById("memoryRow" + argument);
-        var memoryValue = memoryRow.cells[1].querySelector("input").value;
-        //var output = document.getElementById("output1");
-        //output.value = memoryValue;
-        animateInputToMemory(memoryRow.id, memoryValue, "output1");
+        var memoryInput = document.getElementById("memory" + argumentValue);
+        var memoryValue = memoryInput.value;
+        
+        Animation(memoryInput.id, memoryValue, "output1");
     },
     ADD: function() { //Bartek
         console.log("ADD");
@@ -66,18 +73,26 @@ var Functions = {
     SUB: function() { //Eryk
         console.log("SUB");
         var programRow = document.getElementById(programCurrentRow);
-        var instrucion = programRow.cells[3].querySelector("select").value;
-        var argument = programRow.cells[4].querySelector("input").value;
-        console.log(argument);
+        var instruction = programRow.cells[3].querySelector("select");
+        var instructionValue = instruction.value;
+        var argument = programRow.cells[4].querySelector("input");
+        var argumentValue = argument.value;
 
-        document.getElementById("Instruction").value = instrucion;
-        document.getElementById("Argument").value = argument;
+        var instructionProcessor = document.getElementById("Instruction");
+        var argumentProcessor = document.getElementById("Argument");
+        Animation(instruction.id, instructionValue, instructionProcessor.id);
+        Animation(argument.id, argumentValue, argumentProcessor.id);
 
-        var memoryRow = document.getElementById("memoryRow" + argument);
-        var memoryValue = memoryRow.cells[1].querySelector("input").value;
+        var memoryInput = document.getElementById("memory" + argumentValue);
+        var memoryValue = memoryInput.value;
+        var akumulatorInput = document.getElementById("memory0");
+        var result = Math.floor(akumulatorInput.value - memoryValue);
 
-        var akumulatorRow = document.getElementById("memoryRow0");
-        akumulatorRow.cells[1].querySelector("input").value -= memoryValue;
+        Animation(memoryInput.id, memoryValue, akumulatorInput.id)
+        
+        setTimeout(() => {
+            akumulatorInput.value = result;
+        }, 1800);
     },
     MULT: function() { //Bartek
         console.log("MULT");
@@ -85,18 +100,26 @@ var Functions = {
     DIV: function() { //Eryk
         console.log("DIV");
         var programRow = document.getElementById(programCurrentRow);
-        var instrucion = programRow.cells[3].querySelector("select").value;
-        var argument = programRow.cells[4].querySelector("input").value;
-        console.log(argument);
+        var instruction = programRow.cells[3].querySelector("select");
+        var instructionValue = instruction.value;
+        var argument = programRow.cells[4].querySelector("input");
+        var argumentValue = argument.value;
 
-        document.getElementById("Instruction").value = instrucion;
-        document.getElementById("Argument").value = argument;
+        var instructionProcessor = document.getElementById("Instruction");
+        var argumentProcessor = document.getElementById("Argument");
+        Animation(instruction.id, instructionValue, instructionProcessor.id);
+        Animation(argument.id, argumentValue, argumentProcessor.id);
 
-        var memoryRow = document.getElementById("memoryRow" + argument);
-        var memoryValue = memoryRow.cells[1].querySelector("input").value;
+        var memoryInput = document.getElementById("memory" + argumentValue);
+        var memoryValue = memoryInput.value;
+        var akumulatorInput = document.getElementById("memory0");
+        var result = Math.floor(akumulatorInput.value / memoryValue);
 
-        var akumulatorRow = document.getElementById("memoryRow0");
-        akumulatorRow.cells[1].querySelector("input").value /= memoryValue;
+        Animation(memoryInput.id, memoryValue, akumulatorInput.id)
+        
+        setTimeout(() => {
+            akumulatorInput.value = result;
+        }, 1800);
     },
     JUMP: function() { //Bartek
         console.log("JUMP");

@@ -102,12 +102,13 @@ function addRowProgram() {
 
     const selectCell = document.createElement("td");
     const newSelect = document.getElementById("instruction0").cloneNode(true);
-    newSelect.removeAttribute("id");
+    newSelect.id = "instruction" + rowNum;
     selectCell.appendChild(newSelect);
 
     const argumentCell = document.createElement("td");
     const argumentInput = document.createElement("input");
     argumentInput.type = "text";
+    argumentInput.id = "argument" + rowNum;
     argumentCell.appendChild(argumentInput);
 
     const emptyCell = document.createElement("td");
@@ -139,6 +140,7 @@ function addRowMemory(){
     const valueCell = document.createElement("td");
     const input = document.createElement("input");
     input.type = 'number';
+    input.id = 'memory' + rowNum;
     valueCell.appendChild(input);
 
     const btnCell = document.createElement("td");
