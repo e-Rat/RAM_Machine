@@ -1,36 +1,38 @@
 var Functions = {
-    LOAD: function() {
+    LOAD: function() { //Bartek
         console.log("LOAD");
-        const memoryTable = document.getElementById("MemoryTable");
-        const tbody = memoryTable.querySelector("tbody");
-        const rows = tbody.querySelectorAll("tr");
-        let rowNum = rows.length - 3;
-        console.log(rowNum);
-        let label = document.getElementById("programRow" + rowNum);
-        
-        if (label) {
-            const inputs = Array.from(label.querySelectorAll("input"));
-    
-            inputs.forEach(input => {
-                console.log(input.value);
-            });
-        } else {
-            console.log("Brak wiersza o id 'programRow" + rowNum + "'");
-        }
-        // Do Strzelby
-        // nie musisz tego wszystkiego znowu tu wpisaywac to w js mozna koszystac ze zmiennych w innym pliku
-                
     },
-    STORE: function() {
+    STORE: function() { //Eryk
         console.log("STORE");
+        var akumulatorRow = document.getElementById("memoryRow0");
+        var akumulatorValue = akumulatorRow.cells[1].querySelector("input").value;
+        if(!akumulatorValue) {
+            alert("Wartosc musi byc ustalona");
+            return;
+        }
+        else{
+            var programRow = document.getElementById(programCurrentRow);
+            var instrucion = programRow.cells[3].querySelector("select").value;
+            var argument = programRow.cells[4].querySelector("input").value;
+    
+            document.getElementById("Instruction").value = instrucion;
+            document.getElementById("Argument").value = argument;
+    
+            var memoryRow = document.getElementById("memoryRow" + argument);
+            memoryRow.cells[1].querySelector("input").value = akumulatorValue;
+        }
     },
-    READ: function() {
-        console.log("READ");
+    READ: function() { //Bartek
+
     },
-    WRITE: function() {
+    WRITE: function() { //Eryk
         var programRow = document.getElementById(programCurrentRow);
+        var instrucion = programRow.cells[3].querySelector("select").value;
         var argument = programRow.cells[4].querySelector("input").value;
         console.log(argument);
+
+        document.getElementById("Instruction").value = instrucion;
+        document.getElementById("Argument").value = argument;
 
         var memoryRow = document.getElementById("memoryRow" + argument);
         var memoryValue = memoryRow.cells[1].querySelector("input").value;
@@ -38,28 +40,54 @@ var Functions = {
         var output = document.getElementById("output1");
         output.value = memoryValue;
     },
-    ADD: function() {
+    ADD: function() { //Bartek
         console.log("ADD");
     },
-    SUB: function() {
+    SUB: function() { //Eryk
         console.log("SUB");
+        var programRow = document.getElementById(programCurrentRow);
+        var instrucion = programRow.cells[3].querySelector("select").value;
+        var argument = programRow.cells[4].querySelector("input").value;
+        console.log(argument);
+
+        document.getElementById("Instruction").value = instrucion;
+        document.getElementById("Argument").value = argument;
+
+        var memoryRow = document.getElementById("memoryRow" + argument);
+        var memoryValue = memoryRow.cells[1].querySelector("input").value;
+
+        var akumulatorRow = document.getElementById("memoryRow0");
+        akumulatorRow.cells[1].querySelector("input").value -= memoryValue;
     },
-    MULT: function() {
+    MULT: function() { //Bartek
         console.log("MULT");
     },
-    DIV: function() {
+    DIV: function() { //Eryk
         console.log("DIV");
+        var programRow = document.getElementById(programCurrentRow);
+        var instrucion = programRow.cells[3].querySelector("select").value;
+        var argument = programRow.cells[4].querySelector("input").value;
+        console.log(argument);
+
+        document.getElementById("Instruction").value = instrucion;
+        document.getElementById("Argument").value = argument;
+
+        var memoryRow = document.getElementById("memoryRow" + argument);
+        var memoryValue = memoryRow.cells[1].querySelector("input").value;
+
+        var akumulatorRow = document.getElementById("memoryRow0");
+        akumulatorRow.cells[1].querySelector("input").value /= memoryValue;
     },
-    JUMP: function() {
+    JUMP: function() { //Bartek
         console.log("JUMP");
     },
-    JZERO: function() {
+    JZERO: function() { //Eryk
         console.log("JZERO");
     },
-    JGTZ: function() {
+    JGTZ: function() { //Eryk
         console.log("JGTZ");
     },
-    HALT: function() {
+    HALT: function() { //Bartek
         console.log("HALT");
     }
 };
