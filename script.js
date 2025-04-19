@@ -164,3 +164,38 @@ function runStep(){
         console.error("Unknown instruction: " + instruction);
     }
 }
+
+function resetProgram(){
+    var programTable = document.getElementById("ProgramTable");
+    var memoryTable = document.getElementById("MemoryTable");
+    var inputTable = document.getElementById("InputTable");
+    var outputTable = document.getElementById("OutputTable");
+
+    for (let i = 2; i < programTable.rows.length; i++) {
+        const row = programTable.rows[i];
+        row.cells[2].querySelector('input').value = "";
+        row.cells[3].querySelector('select').value = "STORE";
+        row.cells[4].querySelector('input').value = "";
+    }
+    
+    for (let i = 2; i < memoryTable.rows.length; i++) {
+        const row = memoryTable.rows[i];
+        row.cells[1].querySelector('input').value = "";
+    }
+
+    if (inputTable.rows.length > 2) {
+        const inputRow = inputTable.rows[2];
+        for (let i = 0; i < inputRow.cells.length; i++) {
+            const input = inputRow.cells[i].querySelector('input');
+            if (input) input.value = "";
+        }
+    }
+
+    if (outputTable.rows.length > 2) {
+        const inputRow = outputTable.rows[2];
+        for (let i = 0; i < inputRow.cells.length; i++) {
+            const input = inputRow.cells[i].querySelector('input');
+            if (input) input.value = "";
+        }
+    }
+}
