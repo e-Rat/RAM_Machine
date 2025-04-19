@@ -11,6 +11,9 @@
 ### HTML
 - Tworzenie komórek za pomocą JS
 
+### JS 
+- Obsługa błedów w funkcjach
+
 ---
 
 ## 👤 Eryk (e-Rat)
@@ -23,12 +26,12 @@
 
 ### JS
 - **Instrukcje**:
-  - `STORE` Eryk
-  - `WRITE` Eryk
-  - `SUB` Eryk
-  - `DIV` Eryk
-  - `JZERO` Eryk
-  - `JGTZ` Eryk
+  - `STORE`
+  - `WRITE`
+  - `SUB`
+  - `DIV`
+  - `JZERO`
+  - `JGTZ`
 
 - Odczyt/zapis pliku `.txt`/`.json` *(z Bartkiem)*
 
