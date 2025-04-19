@@ -19,25 +19,25 @@
 ## 👤 Eryk (e-Rat)
 
 ### HTML
-- Layout *(z Jankiem)*
+- Layout *(z Jankiem)* //done
 
 ### Strzałki
-- W tabeli programu
+- W tabeli programu //done
 
 ### JS
 - **Instrukcje**:
-  - `STORE`
-  - `WRITE`
-  - `SUB`
-  - `DIV`
+  - `STORE` //done
+  - `WRITE` //done
+  - `SUB` //done
+  - `DIV` //done
   - `JZERO`
   - `JGTZ`
 
-- Odczyt/zapis pliku `.txt`/`.json` *(z Bartkiem)*
+- Odczyt/zapis pliku `.txt`/`.json` *(z Bartkiem)* //zapis
 
 ### Przyciski
 - **Uruchom** – cały program
-- **Krok** – jeden wiersz (tam, gdzie strzałka)
+- **Krok** – jeden wiersz (tam, gdzie strzałka) //done
 - **Resetuj** – reset programu i tabel
 
 ---
