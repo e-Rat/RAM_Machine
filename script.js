@@ -152,7 +152,19 @@ function addRowMemory(){
 }
 
 function runStep(){
-    const row = document.getElementById(programCurrentRow);;
+    var row = document.getElementById(programCurrentRow);
+    var instruction = row.cells[3].querySelector("select").value;
+
+    const instructionFunction = Functions[instruction];
+    if (instructionFunction) {
+        instructionFunction();
+    } else {
+        console.error("Unknown instruction: " + instruction);
+    }
+}
+
+function runAll(){
+    const row = document.getElementById(programCurrentRow);
     var instruction = row.cells[3].querySelector("select").value;
 
     const instructionFunction = Functions[instruction];
