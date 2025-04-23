@@ -108,7 +108,7 @@ var Functions = {
         var memoryValue = memoryInput.value;
         var akumulatorInput = document.getElementById("memory0");
         var result = Math.floor(akumulatorInput.value - memoryValue);
-        
+        //DO eryka zobacz jak zrobilem add i zrob tak samo bo odejmuje ci to jako stringa
         Animation(memoryInput.id, memoryValue, akumulatorInput.id)
         
         setTimeout(() => {

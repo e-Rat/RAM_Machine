@@ -10,7 +10,7 @@
     <aside>
         <div id="Processor">
             <h3>Processor</h3>
-            <label for="instruction">Instruction</label>
+            <label for="instruction">Tylko TUSK</label>
 
             <input type="text" name="Instruction" id="Instruction" readonly>
             
@@ -29,12 +29,12 @@
                 </tr>
                 <tr id="memoryRow0">
                     <td>0</td>
-                    <td><input type="number"></td>
+                    <td><input type="number" id="memory0"></td>
                     <td></td>
                 </tr>
                 <tr id="memoryRow1">
                     <td>1</td>
-                    <td><input type="number"></td>
+                    <td><input type="number" id="memory1"></td>
                     <td></td>
                 </tr>
             </table>
@@ -42,9 +42,9 @@
     </aside>
     <main>
         <div id="Input">
-            <table>
+            <table id="InputTable">
                 <tr>
-                    <th colspan="3">Input</th>
+                    <th colspan="3">Kocham TUSKA</th>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -63,9 +63,12 @@
             <div id="btnContainer">
                 <button onclick="runAll()">Run</button>
                 <button onclick="runStep()">Step</button>
-                <button>Reset</button>
-                <button>Upload Program</button>
-                <button >Download Program</button>
+                <button onclick="resetProgram()">Reset</button>
+                <button onclick="exportProgram()">Export file</button>
+                <div>
+                    <label for="fileInput"> import File: </label>
+                    <input type="file" id="fileInput" />
+                </div>
             </div>
             <table id="ProgramTable">
                 <tr>
@@ -99,7 +102,7 @@
                             <option value="HALT">HALT</option>
                         </select>
                     </td>
-                    <td><input type="text"></td>
+                    <td><input type="text" id="argument0"></td>
                     <td></td>
                 </tr>
                 <tr id="programRow1">
@@ -107,7 +110,7 @@
                     <td>1</td>
                     <td><input type="text"></td>
                     <td>
-                        <select>
+                        <select id="instruction1">
                             <option value="STORE">STORE</option>
                             <option value="LOAD">LOAD </option>
                             <option value="READ">READ</option>
@@ -122,14 +125,14 @@
                             <option value="HALT">HALT</option>
                         </select>
                     </td>
-                    <td><input type="text"></td>
+                    <td><input type="text" id="argument1"></td>
                     <td></td>
                 </tr>
                 
             </table>
         </div>
         <div id="Output">
-            <table>
+            <table id="OutputTable">
                 <tr>
                     <th colspan="3">Output</th>
                 </tr>
@@ -149,5 +152,6 @@
     <script src="functions.js" defer></script>
     <script src="script.js" defer></script>
     <script src="animation.js" defer></script>
+    <script src="file.js"></script>
 </body>
 </html>
