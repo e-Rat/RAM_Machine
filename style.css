@@ -70,18 +70,6 @@ main{
     flex-direction: column;
     justify-content: space-around;
 }
-#Input{
-    width: 90%;
-    height: 20%;
-    padding: var(--padding);
-    margin: var(--margin-mini);
-    border: 1px solid var(--text-color);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
 #Program{
     width: 90%;
     height: 40%;
@@ -94,19 +82,25 @@ main{
     text-align: center;
     overflow: scroll;
 }
-#Output{
+#Output, #Input{
     width: 90%;
     height: 22%;
     padding: var(--padding);
     margin: var(--margin-mini);
     border: 1px solid var(--text-color);
 
-    display: flex;
-    flex-direction: column;
+    display: inline;
+    
     align-items: center;
     text-align: center;
-    overflow: scroll;
 }
+
+#outputScroll, #inputScroll {
+    width: 90%;
+    overflow-x: scroll;
+}
+
+
 button{
     background-color: var(--primary-color);
     border:1px solid var(--text-color);

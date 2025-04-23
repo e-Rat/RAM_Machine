@@ -1,37 +1,35 @@
 function createMemoryRows() {
-    const table = document.getElementById("MemoryTable");  // Uzyskujemy dostęp do tabeli
+    const table = document.getElementById("MemoryTable");  
 
-    // Pętla do tworzenia 50 nowych wierszy
-    for (let i = 0; i < 50; i++) {  // Zaczynamy od 2, ponieważ wiersze 0 i 1 już istnieją w HTML
+    
+    for (let i = 0; i < 50; i++) {  
         const tr = document.createElement("tr");
         tr.id = `memoryRow${i}`;
 
         const td1 = document.createElement("td");
-        td1.textContent = i;  // Numer wiersza
+        td1.textContent = i; 
 
         const td2 = document.createElement("td");
         const input = document.createElement("input");
-        input.type = "number";  // Tworzymy input typu number
-        td2.appendChild(input);  // Dodajemy input do komórki td
+        input.type = "number";  
+        td2.appendChild(input);  
 
-        const td3 = document.createElement("td");  // Pusta komórka
+        const td3 = document.createElement("td");  
 
-        tr.appendChild(td1);  // Dodajemy komórki do wiersza
+        tr.appendChild(td1);  
         tr.appendChild(td2);
         tr.appendChild(td3);
 
-        table.appendChild(tr);  // Dodajemy wiersz do tabeli
+        table.appendChild(tr); 
     }
 }
 
-// Wywołanie funkcji po załadowaniu strony
  createMemoryRows();
 
 
 function createProgramRows() {
-    const table = document.getElementById("ProgramTable");  // Odwołanie do tabeli
+    const table = document.getElementById("ProgramTable");  
 
-    // Pętla do tworzenia 50 nowych wierszy (zaczynamy od 2, bo wiersze 0 i 1 już istnieją)
     for (let i = 0; i < 50; i++) {
         const tr = document.createElement("tr");
         tr.id = `programRow${i}`;
@@ -39,12 +37,12 @@ function createProgramRows() {
         const td1 = document.createElement("td");
 
         const td2 = document.createElement("td");
-        td2.textContent = i;  // Numer wiersza
+        td2.textContent = i; 
 
         const td3 = document.createElement("td");
         const inputLabel = document.createElement("input");
-        inputLabel.type = "text";  // Tworzymy input typu text
-        td3.appendChild(inputLabel);  // Dodajemy input do komórki td
+        inputLabel.type = "text";  
+        td3.appendChild(inputLabel);  
 
         const td4 = document.createElement("td");
         const selectInstruction = document.createElement("select");
@@ -62,27 +60,31 @@ function createProgramRows() {
             <option value="JGTZ">JGTZ</option>
             <option value="HALT">HALT</option>
         `;
-        td4.appendChild(selectInstruction);  // Dodajemy select do komórki td
+        // powyzszy kod nie jest optymalny, obciaza przegladarke przy wczytywaniu i analizowaniu kodu, 
+        // optymalniej bedzie gdy zrobisz array z wszystkimi instrukcjami i z uzyciem petli for wygenerujesz
+        //  wszystkie option dla kazdej z instrukcji
+        td4.appendChild(selectInstruction);  
 
         const td5 = document.createElement("td");
         const inputArgument = document.createElement("input");
-        inputArgument.type = "text";  // Tworzymy input typu text
-        td5.appendChild(inputArgument);  // Dodajemy input do komórki td
+        inputArgument.type = "text";  
+        td5.appendChild(inputArgument);  
 
         const td6 = document.createElement("td");
 
-        tr.appendChild(td1);  // Dodajemy komórki do wiersza
+        tr.appendChild(td1);  
         tr.appendChild(td2);
         tr.appendChild(td3);
         tr.appendChild(td4);
         tr.appendChild(td5);
         tr.appendChild(td6);
+        // zoptymalizuj kod, mozesz napisac to w petli
 
-        table.appendChild(tr);  // Dodajemy wiersz do tabeli
+        table.appendChild(tr);  
     }
 }
 
-// Wywołanie funkcji po załadowaniu strony
+
 createProgramRows();
 
 
@@ -91,15 +93,14 @@ function extendOutputRow() {
     const outputRow = document.getElementById("outputTable");
 
     let currentId = 1;
-    const inputsToAdd = 50; // ile dodatkowych inputów chcesz dodać
+    const inputsToAdd = 50; 
 
     for (let i = 0; i < inputsToAdd; i++) {
-      // Dodajemy komórki nagłówka (pierwszy wiersz)
+     
       const headerTd = document.createElement("td");
-      headerTd.textContent = currentId; // Numer w nagłówku
+      headerTd.textContent = currentId; 
       headerRow.appendChild(headerTd);
 
-      // Dodajemy inputy w drugim wierszu
       const td = document.createElement("td");
       const input = document.createElement("input");
       input.type = "number";
@@ -111,4 +112,30 @@ function extendOutputRow() {
     }
   }
   extendOutputRow();
+
+
+  function extendInputRow() {
+    const headerRow = document.getElementById("headerInRow");
+    const outputRow = document.getElementById("inputTable");
+
+    let currentId = 1;
+    const inputsToAdd = 50; 
+
+    for (let i = 0; i < inputsToAdd; i++) {
+     
+      const headerTd = document.createElement("td");
+      headerTd.textContent = currentId; 
+      headerRow.appendChild(headerTd);
+
+      const td = document.createElement("td");
+      const input = document.createElement("input");
+      input.type = "number";
+      input.id = `output${currentId}`;
+      td.appendChild(input);
+      outputRow.appendChild(td);
+
+      currentId++;
+    }
+  }
+  extendInputRow();
 

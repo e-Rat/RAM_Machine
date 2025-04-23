@@ -32,22 +32,12 @@
     </aside>
     <main>
         <div id="Input">
-            <table>
-                <tr>
-                    <th colspan="3">Input</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td><input type="number" id="input1"></td>
-                    <td><input type="number" id="input2"></td>
-                    <td><input type="number" id="input3"></td>
-                </tr>
-            
-            </table>
+            <p>Input</p>
+            <div id="inputScroll">
+                <table id="inputTable">
+                    <tr id="headerInRow">
+                </table>    
+            </div>
         </div>
         <div id="Program">
             <div id="btnContainer">
@@ -72,14 +62,14 @@
                 
             </table>
         </div>
+       
         <div id="Output">
-            <table id="outputTable">
-                <tr>
-                    <th colspan="3">Output</th>
-                </tr>
-                <tr id="headerRow">
-
-            </table>
+            <p>Output</p>
+            <div id="outputScroll">
+                <table id="outputTable">
+                    <tr id="headerRow">
+                </table>    
+            </div>
         </div>
     </main>
     <script src="functions.js" defer></script>

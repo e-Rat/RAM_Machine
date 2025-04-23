@@ -126,9 +126,11 @@ function addRowProgram() {
 
 function addRowMemory(){
     const memoryTable = document.getElementById("MemoryTable");
-    const tbody = memoryTable.querySelector("tbody");
-    const rows = tbody.querySelectorAll("tr");
-    let rowNum = rows.length - 2;
+    // const tbody = memoryTable.querySelector("tbody");
+    // const rows = tbody.querySelectorAll("tr");
+    // let rowNum = rows.length - 2;
+    let trElements = memoryTable.querySelectorAll("tr");
+    let rowNum = trElements.length - 2;
 
     const newRow = document.createElement("tr");
     newRow.id = "memoryRow" + rowNum;
@@ -147,7 +149,7 @@ function addRowMemory(){
     newRow.appendChild(valueCell);
     newRow.appendChild(btnCell);
 
-    tbody.appendChild(newRow);
+    memoryTable.appendChild(newRow);
     addBtnMemory();
 }
 
