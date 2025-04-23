@@ -69,6 +69,27 @@ var Functions = {
     },
     ADD: function() { //Bartek
         console.log("ADD");
+        var programRow = document.getElementById(programCurrentRow);
+        var instruction = programRow.cells[3].querySelector("select");
+        var instructionValue = instruction.value;
+        var argument = programRow.cells[4].querySelector("input");
+        var argumentValue = argument.value;
+
+        var instructionProcessor = document.getElementById("Instruction");
+        var argumentProcessor = document.getElementById("Argument");
+        Animation(instruction.id, instructionValue, instructionProcessor.id);
+        Animation(argument.id, argumentValue, argumentProcessor.id);
+
+        var memoryInput = document.getElementById("memory" + argumentValue);
+        var memoryValue = parseInt(memoryInput.value);
+        var akumulatorInput = document.getElementById("memory0");
+        var result = Math.floor(parseInt(akumulatorInput.value) + memoryValue);
+        console.log(result)
+        Animation(memoryInput.id, memoryValue, akumulatorInput.id)
+
+        setTimeout(() => {
+           akumulatorInput.value = result;
+        }, 1800);
     },
     SUB: function() { //Eryk
         console.log("SUB");
@@ -87,7 +108,7 @@ var Functions = {
         var memoryValue = memoryInput.value;
         var akumulatorInput = document.getElementById("memory0");
         var result = Math.floor(akumulatorInput.value - memoryValue);
-
+        //DO eryka zobacz jak zrobilem add i zrob tak samo bo odejmuje ci to jako stringa
         Animation(memoryInput.id, memoryValue, akumulatorInput.id)
         
         setTimeout(() => {
@@ -96,6 +117,28 @@ var Functions = {
     },
     MULT: function() { //Bartek
         console.log("MULT");
+        var programRow = document.getElementById(programCurrentRow);
+        var instruction = programRow.cells[3].querySelector("select");
+        var instructionValue = instruction.value;
+        var argument = programRow.cells[4].querySelector("input");
+        var argumentValue = argument.value;
+
+        var instructionProcessor = document.getElementById("Instruction");
+        var argumentProcessor = document.getElementById("Argument");
+        Animation(instruction.id, instructionValue, instructionProcessor.id);
+        Animation(argument.id, argumentValue, argumentProcessor.id);
+
+        var memoryInput = document.getElementById("memory" + argumentValue);
+        var memoryValue = memoryInput.value;
+        var akumulatorInput = document.getElementById("memory0");
+        var result = Math.floor(akumulatorInput.value * memoryValue);
+        console.log(result)
+
+        Animation(memoryInput.id, memoryValue, akumulatorInput.id);
+
+        setTimeout(() => {
+            akumulatorInput.value = result;
+        }, 1800);
     },
     DIV: function() { //Eryk
         console.log("DIV");
