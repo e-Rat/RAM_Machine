@@ -12,10 +12,10 @@
             <h3>Processor</h3>
             <label for="instruction">Instruction</label>
 
-            <input type="number" name="instruction" id="instruction">
+            <input type="text" name="Instruction" id="Instruction" readonly>
             
             <label for="Argument">Argument</label>
-            <input type="number" name="Argument" id="Argument">
+            <input type="number" name="Argument" id="Argument" readonly>
         </div>
         <div id="Memory">
             <table id="MemoryTable">
@@ -27,25 +27,48 @@
                     <td>Value</td>
                     <td></td>
                 </tr>
+                <tr id="memoryRow0">
+                    <td>0</td>
+                    <td><input type="number" id="memory0"></td>
+                    <td></td>
+                </tr>
+                <tr id="memoryRow1">
+                    <td>1</td>
+                    <td><input type="number" id="memory1"></td>
+                    <td></td>
+                </tr>
             </table>
         </div>
     </aside>
     <main>
         <div id="Input">
-            <p>Input</p>
-            <div id="inputScroll">
-                <table id="inputTable">
-                    <tr id="headerInRow">
-                </table>    
-            </div>
+            <table id="InputTable">
+                <tr>
+                    <th colspan="3">Input</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td><input type="number" id="input1"></td>
+                    <td><input type="number" id="input2"></td>
+                    <td><input type="number" id="input3"></td>
+                </tr>
+            
+            </table>
         </div>
         <div id="Program">
             <div id="btnContainer">
-                <button>Run</button>
+                <button onclick="runAll()">Run</button>
                 <button onclick="runStep()">Step</button>
-                <button>Reset</button>
-                <button>Upload Program</button>
-                <button >Download Program</button>
+                <button onclick="resetProgram()">Reset</button>
+                <button onclick="exportProgram()">Export file</button>
+                <div>
+                    <label for="fileInput"> import File: </label>
+                    <input type="file" id="fileInput" />
+                </div>
             </div>
             <table id="ProgramTable">
                 <tr>
@@ -59,21 +82,76 @@
                     <td>Argument</td>
                     <td></td>
                 </tr>
+                <tr id="programRow0">
+                    <td></td>
+                    <td>0</td>
+                    <td><input type="text"></td>
+                    <td>
+                        <select id="instruction0">
+                            <option value="STORE">STORE</option>
+                            <option value="LOAD">LOAD </option>
+                            <option value="READ">READ</option>
+                            <option value="WRITE">WRITE</option>
+                            <option value="ADD">ADD</option>
+                            <option value="SUB">SUB</option>
+                            <option value="MULT">MULT</option>
+                            <option value="DIV">DIV</option>
+                            <option value="JUMP">JUMP</option>
+                            <option value="JZERO">JZERO</option>
+                            <option value="JGTZ">JGTZ</option>
+                            <option value="HALT">HALT</option>
+                        </select>
+                    </td>
+                    <td><input type="text" id="argument0"></td>
+                    <td></td>
+                </tr>
+                <tr id="programRow1">
+                    <td></td>
+                    <td>1</td>
+                    <td><input type="text"></td>
+                    <td>
+                        <select id="instruction1">
+                            <option value="STORE">STORE</option>
+                            <option value="LOAD">LOAD </option>
+                            <option value="READ">READ</option>
+                            <option value="WRITE">WRITE</option>
+                            <option value="ADD">ADD</option>
+                            <option value="SUB">SUB</option>
+                            <option value="MULT">MULT</option>
+                            <option value="DIV">DIV</option>
+                            <option value="JUMP">JUMP</option>
+                            <option value="JZERO">JZERO</option>
+                            <option value="JGTZ">JGTZ</option>
+                            <option value="HALT">HALT</option>
+                        </select>
+                    </td>
+                    <td><input type="text" id="argument1"></td>
+                    <td></td>
+                </tr>
                 
             </table>
         </div>
-       
         <div id="Output">
-            <p>Output</p>
-            <div id="outputScroll">
-                <table id="outputTable">
-                    <tr id="headerRow">
-                </table>    
-            </div>
+            <table id="OutputTable">
+                <tr>
+                    <th colspan="3">Output</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td><input type="number" id="output1" readonly></td>
+                    <td><input type="number" id="output2" readonly></td>
+                    <td><input type="number" id="output3" readonly></td>
+                </tr>
+            </table>
         </div>
     </main>
     <script src="functions.js" defer></script>
     <script src="script.js" defer></script>
-    <script src="display.js" defer></script>
+    <script src="animation.js" defer></script>
+    <script src="file.js"></script>
 </body>
 </html>

@@ -96,7 +96,7 @@ main{
 }
 
 #outputScroll, #inputScroll {
-    width: 90%;
+    width: 100%;
     overflow-x: scroll;
 }
 
