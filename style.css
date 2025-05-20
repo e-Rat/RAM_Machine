@@ -100,7 +100,6 @@ main{
     overflow-x: scroll;
 }
 
-
 button{
     background-color: var(--primary-color);
     border:1px solid var(--text-color);

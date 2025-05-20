@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", createMemoryRows);
+document.addEventListener("DOMContentLoaded", createProgramRows);
 document.addEventListener("DOMContentLoaded", addBtnProgram);
 document.addEventListener("DOMContentLoaded", addBtnMemory);
 document.addEventListener("DOMContentLoaded", addArrow);
@@ -5,6 +7,73 @@ document.addEventListener("DOMContentLoaded", addArrowFunction);
 
 var programCurrentRow = "programRow0";
 var memoryCurrentRow = "memoryRow0";
+
+
+
+function createMemoryRows(){
+    const memoryTable = document.getElementById("MemoryTable");
+    const tbody = memoryTable.querySelector("tbody");
+    for(var i = 0; i<50; i++){
+        const row = document.createElement("tr");
+        row.id = "memoryRow" + (i+2);
+        const index = document.createElement("td");
+        index.textContent = i + 2;
+        const td2 = document.createElement("td"); 
+        const input = document.createElement("input");
+        input.type = 'number';
+        input.readOnly = true;
+        input.id = "memory" + (i+2);
+        td2.appendChild(input);
+
+        const blank = document.createElement("td");
+
+        tbody.appendChild(row);
+        row.appendChild(index);
+        row.appendChild(td2);
+        row.appendChild(blank);
+    }
+}
+
+function createProgramRows(){
+    const programTable = document.getElementById("ProgramTable");
+    const tbody = programTable.querySelector("tbody");
+    for(var i = 0; i<50; i++){
+        const row = document.createElement("tr");
+        row.id = "programRow" + (i+2);
+
+        const blank = document.createElement("td");
+
+        const index = document.createElement("td");
+        index.textContent = i + 2;
+
+        const td2 = document.createElement("td");
+        const inputLabel = document.createElement("input");
+        inputLabel.type = 'text';
+        inputLabel.id = 'label' + (i+2);
+        td2.appendChild(inputLabel);
+        
+        const selectCell = document.createElement("td");
+        const newSelect = document.getElementById("instruction0").cloneNode(true);
+        newSelect.id = "instruction" + (i+2);
+        selectCell.appendChild(newSelect);
+
+        const td3 = document.createElement("td");
+        const inputArgument = document.createElement("input");
+        inputArgument.type = 'number';
+        inputArgument.id = "argument" + (i+2);
+        td3.appendChild(inputArgument);
+
+        const blank2 = document.createElement("td");
+
+        tbody.appendChild(row);
+        row.appendChild(blank);
+        row.appendChild(index)
+        row.appendChild(td2);
+        row.appendChild(selectCell);
+        row.appendChild(td3);
+        row.appendChild(blank2);
+    }
+}
 
 function addBtnProgram() {
     const programTable = document.getElementById("ProgramTable");
@@ -82,7 +151,7 @@ function addArrowFunction(){
 
 function addRowProgram() {
     const programTable = document.getElementById("ProgramTable");
-    const tbody = programTable.querySelector("tbody");  // This will now correctly reference tbody
+    const tbody = programTable.querySelector("tbody");
     const rows = tbody.querySelectorAll("tr");
     let rowNum = rows.length - 2;
 
