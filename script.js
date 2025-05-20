@@ -82,7 +82,7 @@ function addArrowFunction(){
 
 function addRowProgram() {
     const programTable = document.getElementById("ProgramTable");
-    const tbody = programTable.querySelector("tbody");
+    const tbody = programTable.querySelector("tbody");  // This will now correctly reference tbody
     const rows = tbody.querySelectorAll("tr");
     let rowNum = rows.length - 2;
 
@@ -119,16 +119,14 @@ function addRowProgram() {
     newRow.appendChild(argumentCell);
     newRow.appendChild(emptyCell);
 
-    tbody.appendChild(newRow);
+    tbody.appendChild(newRow);  // Row added to tbody
     addBtnProgram();
     addArrowFunction();
 }
 
+
 function addRowMemory(){
     const memoryTable = document.getElementById("MemoryTable");
-    // const tbody = memoryTable.querySelector("tbody");
-    // const rows = tbody.querySelectorAll("tr");
-    // let rowNum = rows.length - 2;
     let trElements = memoryTable.querySelectorAll("tr");
     let rowNum = trElements.length - 2;
 
