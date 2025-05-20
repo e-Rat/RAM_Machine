@@ -107,7 +107,7 @@ var Functions = {
         var memoryInput = document.getElementById("memory" + argumentValue);
         var memoryValue = memoryInput.value;
         var akumulatorInput = document.getElementById("memory0");
-        var result = Math.floor(akumulatorInput.value - memoryValue);
+        var result = Math.floor(parseInt(akumulatorInput.value) - memoryValue);
         //DO eryka zobacz jak zrobilem add i zrob tak samo bo odejmuje ci to jako stringa
         Animation(memoryInput.id, memoryValue, akumulatorInput.id)
         
@@ -131,7 +131,7 @@ var Functions = {
         var memoryInput = document.getElementById("memory" + argumentValue);
         var memoryValue = memoryInput.value;
         var akumulatorInput = document.getElementById("memory0");
-        var result = Math.floor(akumulatorInput.value * memoryValue);
+        var result = Math.floor(parseInt(akumulatorInput.value) * memoryValue);
         console.log(result)
 
         Animation(memoryInput.id, memoryValue, akumulatorInput.id);
@@ -156,7 +156,7 @@ var Functions = {
         var memoryInput = document.getElementById("memory" + argumentValue);
         var memoryValue = memoryInput.value;
         var akumulatorInput = document.getElementById("memory0");
-        var result = Math.floor(akumulatorInput.value / memoryValue);
+        var result = Math.floor(parseInt(akumulatorInput.value) / memoryValue);
 
         Animation(memoryInput.id, memoryValue, akumulatorInput.id)
         
