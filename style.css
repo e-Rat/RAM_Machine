@@ -95,9 +95,7 @@ main{
     align-items: center;
     text-align: center;
 }
-
-#outputScroll, #inputScroll {
-    width: 100%;
+#OutputTableBox, #InputTableBox {
     overflow-x: scroll;
 }
 

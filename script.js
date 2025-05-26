@@ -1,14 +1,18 @@
 document.addEventListener("DOMContentLoaded", createMemoryRows);
 document.addEventListener("DOMContentLoaded", createProgramRows);
+document.addEventListener("DOMContentLoaded", createInputRows);
+document.addEventListener("DOMContentLoaded", createOutputRows);
 document.addEventListener("DOMContentLoaded", addBtnProgram);
 document.addEventListener("DOMContentLoaded", addBtnMemory);
 document.addEventListener("DOMContentLoaded", addArrow);
 document.addEventListener("DOMContentLoaded", addArrowFunction);
+document.addEventListener("DOMContentLoaded", addInputANDOutputArrow);
+
 
 var programCurrentRow = "programRow0";
 var memoryCurrentRow = "memoryRow0";
-
-
+var inputCurrentRow = "inputArrow1";
+var outputCurrentRow = "outputArrow1";
 
 function createMemoryRows(){
     const memoryTable = document.getElementById("MemoryTable");
@@ -74,6 +78,55 @@ function createProgramRows(){
         row.appendChild(blank2);
     }
 }
+
+function createInputRows(){
+    const numRow = document.getElementById("inputNumRow");
+    const inputRow = document.getElementById("inputInputRow");
+    const arrowRow = document.getElementById("inputArrowRow");
+
+    for(var i = 4; i <50;i++){
+        const numTd = document.createElement("td");
+        numTd.textContent = i;
+        numRow.appendChild(numTd);
+    }
+    for (var i = 4; i < 50; i++) {
+        const inputTd = document.createElement("td");
+        var input = document.createElement('input');
+        input.type = 'number';
+        input.id = `input${i}`;
+        inputTd.appendChild(input);
+        inputRow.appendChild(inputTd);
+    }
+    for(var i = 4;i<50;i++){
+        const arrowsTd = document.createElement("td");
+        numRow.appendChild(arrowsTd);
+    }
+}
+
+function createOutputRows(){
+    const numRow = document.getElementById("outputNumRow");
+    const inputRow = document.getElementById("outputInputRow");
+    const arrowRow = document.getElementById("outputArrowRow");
+
+    for(var i = 4; i <50;i++){
+        const numTd = document.createElement("td");
+        numTd.textContent = i;
+        numRow.appendChild(numTd);
+    }
+    for (var i = 4; i < 50; i++) {
+        const inputTd = document.createElement("td");
+        var input = document.createElement('input');
+        input.type = 'number';
+        input.id = `output${i}`;
+        inputTd.appendChild(input);
+        inputRow.appendChild(inputTd);
+    }
+    for(var i = 4;i<50;i++){
+        const arrowsTd = document.createElement("td");
+        numRow.appendChild(arrowsTd);
+    }
+}
+
 
 function addBtnProgram() {
     const programTable = document.getElementById("ProgramTable");
@@ -220,6 +273,15 @@ function addRowMemory(){
 
     memoryTable.appendChild(newRow);
     addBtnMemory();
+}
+
+function addInputANDOutputArrow(){
+    var inputTableCurrentRow = document.getElementById(inputCurrentRow);
+    var outputTableCurrentRow = document.getElementById(outputCurrentRow);
+
+    inputTableCurrentRow.textContent = "⇧";
+    outputTableCurrentRow.textContent = "⇧";
+
 }
 
 function runStep(){
