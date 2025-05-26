@@ -42,30 +42,37 @@
     </aside>
     <main>
         <div id="Input">
-            <table>
-                <tr>
-                    <th colspan="3">Input</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td><input type="number" id="input1"></td>
-                    <td><input type="number" id="input2"></td>
-                    <td><input type="number" id="input3"></td>
-                </tr>
-            
-            </table>
+            <h2>Input</h2>
+            <div id="InputTableBox">
+                <table id="InputTable">
+                    <tr id="inputNumRow">
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr id="inputInputRow">
+                        <td><input type="number" id="input1"></td>
+                        <td><input type="number" id="input2"></td>
+                        <td><input type="number" id="input3"></td>
+                    </tr>
+                    <tr id="inputArrowRow">
+                        <td id="inputArrow1"></td>
+                        <td id="inputArrow2"></td>
+                        <td id="inputArrow3"></td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div id="Program">
             <div id="btnContainer">
                 <button onclick="runAll()">Run</button>
                 <button onclick="runStep()">Step</button>
-                <button>Reset</button>
-                <button>Upload Program</button>
-                <button >Download Program</button>
+                <button onclick="resetProgram()">Reset</button>
+                <button onclick="exportProgram()">Export file</button>
+                <div>
+                    <label for="fileInput"> import File: </label>
+                    <input type="file" id="fileInput" />
+                </div>
             </div>
             <table id="ProgramTable">
                 <tr>
@@ -129,25 +136,33 @@
             </table>
         </div>
         <div id="Output">
-            <table>
-                <tr>
-                    <th colspan="3">Output</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td><input type="number" id="output1" readonly></td>
-                    <td><input type="number" id="output2" readonly></td>
-                    <td><input type="number" id="output3" readonly></td>
-                </tr>
-            </table>
+            <h2>Output</h2>
+            <div id="OutputTableBox">
+                <table id="OutputTable">
+                    <tr id="outputNumRow">
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr id="outputInputRow">
+                        <td><input type="number" id="output1" readonly></td>
+                        <td><input type="number" id="output2" readonly></td>
+                        <td><input type="number" id="output3" readonly></td>
+                    </tr>
+                    <tr id="outputArrowRow">
+                        <td id="outputArrow1"></td>
+                        <td id="outputArrow2"></td>
+                        <td id="outputArrow3"></td>
+                    </tr>
+                </table>
+            </div>
+            
         </div>
     </main>
     <script src="functions.js" defer></script>
     <script src="script.js" defer></script>
     <script src="animation.js" defer></script>
+    <script src="display.js" defer></script>
+    <script src="file.js"></script>
 </body>
 </html>

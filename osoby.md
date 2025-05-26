@@ -11,30 +11,33 @@
 ### HTML
 - Tworzenie komórek za pomocą JS
 
+### JS 
+- Obsługa błedów w funkcjach
+
 ---
 
 ## 👤 Eryk (e-Rat)
 
 ### HTML
-- Layout *(z Jankiem)*
+- Layout *(z Jankiem)* //done
 
 ### Strzałki
-- W tabeli programu
+- W tabeli programu //done
 
 ### JS
 - **Instrukcje**:
-  - `STORE` Eryk
-  - `WRITE` Eryk
-  - `SUB` Eryk
-  - `DIV` Eryk
-  - `JZERO` Eryk
-  - `JGTZ` Eryk
+  - `STORE` //done
+  - `WRITE` //done
+  - `SUB` //done
+  - `DIV` //done
+  - `JZERO`
+  - `JGTZ`
 
-- Odczyt/zapis pliku `.txt`/`.json` *(z Bartkiem)*
+- Odczyt/zapis pliku `.txt`/`.json` *(z Bartkiem)* //zapis
 
 ### Przyciski
 - **Uruchom** – cały program
-- **Krok** – jeden wiersz (tam, gdzie strzałka)
+- **Krok** – jeden wiersz (tam, gdzie strzałka) //done
 - **Resetuj** – reset programu i tabel
 
 ---

@@ -1,10 +1,132 @@
+document.addEventListener("DOMContentLoaded", createMemoryRows);
+document.addEventListener("DOMContentLoaded", createProgramRows);
+document.addEventListener("DOMContentLoaded", createInputRows);
+document.addEventListener("DOMContentLoaded", createOutputRows);
 document.addEventListener("DOMContentLoaded", addBtnProgram);
 document.addEventListener("DOMContentLoaded", addBtnMemory);
 document.addEventListener("DOMContentLoaded", addArrow);
 document.addEventListener("DOMContentLoaded", addArrowFunction);
+document.addEventListener("DOMContentLoaded", addInputANDOutputArrow);
+
 
 var programCurrentRow = "programRow0";
 var memoryCurrentRow = "memoryRow0";
+var inputCurrentRow = "inputArrow1";
+var outputCurrentRow = "outputArrow1";
+
+function createMemoryRows(){
+    const memoryTable = document.getElementById("MemoryTable");
+    const tbody = memoryTable.querySelector("tbody");
+    for(var i = 0; i<50; i++){
+        const row = document.createElement("tr");
+        row.id = "memoryRow" + (i+2);
+        const index = document.createElement("td");
+        index.textContent = i + 2;
+        const td2 = document.createElement("td"); 
+        const input = document.createElement("input");
+        input.type = 'number';
+        input.readOnly = true;
+        input.id = "memory" + (i+2);
+        td2.appendChild(input);
+
+        const blank = document.createElement("td");
+
+        tbody.appendChild(row);
+        row.appendChild(index);
+        row.appendChild(td2);
+        row.appendChild(blank);
+    }
+}
+
+function createProgramRows(){
+    const programTable = document.getElementById("ProgramTable");
+    const tbody = programTable.querySelector("tbody");
+    for(var i = 0; i<50; i++){
+        const row = document.createElement("tr");
+        row.id = "programRow" + (i+2);
+
+        const blank = document.createElement("td");
+
+        const index = document.createElement("td");
+        index.textContent = i + 2;
+
+        const td2 = document.createElement("td");
+        const inputLabel = document.createElement("input");
+        inputLabel.type = 'text';
+        inputLabel.id = 'label' + (i+2);
+        td2.appendChild(inputLabel);
+        
+        const selectCell = document.createElement("td");
+        const newSelect = document.getElementById("instruction0").cloneNode(true);
+        newSelect.id = "instruction" + (i+2);
+        selectCell.appendChild(newSelect);
+
+        const td3 = document.createElement("td");
+        const inputArgument = document.createElement("input");
+        inputArgument.type = 'number';
+        inputArgument.id = "argument" + (i+2);
+        td3.appendChild(inputArgument);
+
+        const blank2 = document.createElement("td");
+
+        tbody.appendChild(row);
+        row.appendChild(blank);
+        row.appendChild(index)
+        row.appendChild(td2);
+        row.appendChild(selectCell);
+        row.appendChild(td3);
+        row.appendChild(blank2);
+    }
+}
+
+function createInputRows(){
+    const numRow = document.getElementById("inputNumRow");
+    const inputRow = document.getElementById("inputInputRow");
+    const arrowRow = document.getElementById("inputArrowRow");
+
+    for(var i = 4; i <50;i++){
+        const numTd = document.createElement("td");
+        numTd.textContent = i;
+        numRow.appendChild(numTd);
+    }
+    for (var i = 4; i < 50; i++) {
+        const inputTd = document.createElement("td");
+        var input = document.createElement('input');
+        input.type = 'number';
+        input.id = `input${i}`;
+        inputTd.appendChild(input);
+        inputRow.appendChild(inputTd);
+    }
+    for(var i = 4;i<50;i++){
+        const arrowsTd = document.createElement("td");
+        numRow.appendChild(arrowsTd);
+    }
+}
+
+function createOutputRows(){
+    const numRow = document.getElementById("outputNumRow");
+    const inputRow = document.getElementById("outputInputRow");
+    const arrowRow = document.getElementById("outputArrowRow");
+
+    for(var i = 4; i <50;i++){
+        const numTd = document.createElement("td");
+        numTd.textContent = i;
+        numRow.appendChild(numTd);
+    }
+    for (var i = 4; i < 50; i++) {
+        const inputTd = document.createElement("td");
+        var input = document.createElement('input');
+        input.type = 'number';
+        input.id = `output${i}`;
+        inputTd.appendChild(input);
+        inputRow.appendChild(inputTd);
+    }
+    for(var i = 4;i<50;i++){
+        const arrowsTd = document.createElement("td");
+        numRow.appendChild(arrowsTd);
+    }
+}
+
 
 function addBtnProgram() {
     const programTable = document.getElementById("ProgramTable");
@@ -120,16 +242,16 @@ function addRowProgram() {
     newRow.appendChild(argumentCell);
     newRow.appendChild(emptyCell);
 
-    tbody.appendChild(newRow);
+    tbody.appendChild(newRow);  // Row added to tbody
     addBtnProgram();
     addArrowFunction();
 }
 
+
 function addRowMemory(){
     const memoryTable = document.getElementById("MemoryTable");
-    const tbody = memoryTable.querySelector("tbody");
-    const rows = tbody.querySelectorAll("tr");
-    let rowNum = rows.length - 2;
+    let trElements = memoryTable.querySelectorAll("tr");
+    let rowNum = trElements.length - 2;
 
     const newRow = document.createElement("tr");
     newRow.id = "memoryRow" + rowNum;
@@ -149,12 +271,21 @@ function addRowMemory(){
     newRow.appendChild(valueCell);
     newRow.appendChild(btnCell);
 
-    tbody.appendChild(newRow);
+    memoryTable.appendChild(newRow);
     addBtnMemory();
 }
 
+function addInputANDOutputArrow(){
+    var inputTableCurrentRow = document.getElementById(inputCurrentRow);
+    var outputTableCurrentRow = document.getElementById(outputCurrentRow);
+
+    inputTableCurrentRow.textContent = "⇧";
+    outputTableCurrentRow.textContent = "⇧";
+
+}
+
 function runStep(){
-    const row = document.getElementById(programCurrentRow);
+    var row = document.getElementById(programCurrentRow);
     var instruction = row.cells[3].querySelector("select").value;
 
     const instructionFunction = Functions[instruction];
@@ -181,6 +312,41 @@ function runAll() {
             instructionFunction();
         }else{
             console.error("Unknown instruction: " + instruction + " at line " + (i - 2));
+        }
+    }
+}
+
+function resetProgram(){
+    var programTable = document.getElementById("ProgramTable");
+    var memoryTable = document.getElementById("MemoryTable");
+    var inputTable = document.getElementById("InputTable");
+    var outputTable = document.getElementById("OutputTable");
+
+    for (let i = 2; i < programTable.rows.length; i++) {
+        const row = programTable.rows[i];
+        row.cells[2].querySelector('input').value = "";
+        row.cells[3].querySelector('select').value = "STORE";
+        row.cells[4].querySelector('input').value = "";
+    }
+    
+    for (let i = 2; i < memoryTable.rows.length; i++) {
+        const row = memoryTable.rows[i];
+        row.cells[1].querySelector('input').value = "";
+    }
+
+    if (inputTable.rows.length > 2) {
+        const inputRow = inputTable.rows[2];
+        for (let i = 0; i < inputRow.cells.length; i++) {
+            const input = inputRow.cells[i].querySelector('input');
+            if (input) input.value = "";
+        }
+    }
+
+    if (outputTable.rows.length > 2) {
+        const inputRow = outputTable.rows[2];
+        for (let i = 0; i < inputRow.cells.length; i++) {
+            const input = inputRow.cells[i].querySelector('input');
+            if (input) input.value = "";
         }
     }
 }
