@@ -154,7 +154,7 @@ function addRowMemory(){
 }
 
 function runStep(){
-    const row = document.getElementById(programCurrentRow);;
+    const row = document.getElementById(programCurrentRow);
     var instruction = row.cells[3].querySelector("select").value;
 
     const instructionFunction = Functions[instruction];
@@ -162,5 +162,25 @@ function runStep(){
         instructionFunction();
     } else {
         console.error("Unknown instruction: " + instruction);
+    }
+}
+function runAll() {
+    const table = document.getElementById("ProgramTable");
+    const rows = table.getElementsByTagName("tr");
+
+    for (let i = 2; i < rows.length; i++) {
+        const row = rows[i];
+        const instructionSelect = row.cells[3].querySelector("select");
+        if (!instructionSelect) continue;
+
+        const instruction = instructionSelect.value.trim();
+        const instructionFunction = Functions[instruction];
+        if (instruction === "HALT") break;
+
+        if (instructionFunction) {
+            instructionFunction();
+        }else{
+            console.error("Unknown instruction: " + instruction + " at line " + (i - 2));
+        }
     }
 }
