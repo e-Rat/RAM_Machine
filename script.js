@@ -295,16 +295,24 @@ function runStep(){
         console.error("Unknown instruction: " + instruction);
     }
 }
+function runAll() {
+    const table = document.getElementById("ProgramTable");
+    const rows = table.getElementsByTagName("tr");
 
-function runAll(){
-    const row = document.getElementById(programCurrentRow);
-    var instruction = row.cells[3].querySelector("select").value;
+    for (let i = 2; i < rows.length; i++) {
+        const row = rows[i];
+        const instructionSelect = row.cells[3].querySelector("select");
+        if (!instructionSelect) continue;
 
-    const instructionFunction = Functions[instruction];
-    if (instructionFunction) {
-        instructionFunction();
-    } else {
-        console.error("Unknown instruction: " + instruction);
+        const instruction = instructionSelect.value.trim();
+        const instructionFunction = Functions[instruction];
+        if (instruction === "HALT") break;
+
+        if (instructionFunction) {
+            instructionFunction();
+        }else{
+            console.error("Unknown instruction: " + instruction + " at line " + (i - 2));
+        }
     }
 }
 
