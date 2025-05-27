@@ -65,6 +65,12 @@ var Functions = {
     
         const input = document.getElementById("input1");
         const memoryInput = document.getElementById("memory" + argumentValue);
+
+        var indexInputCurrArrowRow = parseInt(inputCurrentRow[inputCurrentRow.length -1]);
+        document.getElementById(inputCurrentRow).textContent = "";
+        indexInputCurrArrowRow++;
+        inputCurrentRow = "inputArrow" + indexInputCurrArrowRow;
+        addInputANDOutputArrow();
     
         Animation(input.id, input.value, memoryInput.id);
     
@@ -87,6 +93,13 @@ var Functions = {
 
         var memoryInput = document.getElementById("memory" + argumentValue);
         var memoryValue = memoryInput.value;
+
+        var indexOutputCurrArrowRow = parseInt(outputCurrentRow[outputCurrentRow.length -1]);
+        document.getElementById(outputCurrentRow).textContent = "";
+        console.log(indexOutputCurrArrowRow);
+        indexOutputCurrArrowRow++;
+        outputCurrentRow = "outputArrow" + indexOutputCurrArrowRow;
+        addInputANDOutputArrow();
         
         Animation(memoryInput.id, memoryValue, "output1");
     },

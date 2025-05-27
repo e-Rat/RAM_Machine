@@ -16,6 +16,7 @@ var memoryCurrentRow = "memoryRow0";
 var inputCurrentRow = "inputArrow1";
 var outputCurrentRow = "outputArrow1";
 
+
 function createMemoryRows(){
     const memoryTable = document.getElementById("MemoryTable");
     const tbody = memoryTable.querySelector("tbody");
@@ -285,6 +286,9 @@ function addInputANDOutputArrow(){
 
     inputTableCurrentRow.textContent = "⇧";
     outputTableCurrentRow.textContent = "⇧";
+
+}
+function changeInputANDOutputArrow(inputCurrentRow, outputCurrentRow){
 
 }
 
