@@ -1,12 +1,14 @@
-document.addEventListener("DOMContentLoaded", createMemoryRows);
-document.addEventListener("DOMContentLoaded", createProgramRows);
-document.addEventListener("DOMContentLoaded", createInputRows);
-document.addEventListener("DOMContentLoaded", createOutputRows);
-document.addEventListener("DOMContentLoaded", addBtnProgram);
-document.addEventListener("DOMContentLoaded", addBtnMemory);
-document.addEventListener("DOMContentLoaded", addArrow);
-document.addEventListener("DOMContentLoaded", addArrowFunction);
-document.addEventListener("DOMContentLoaded", addInputANDOutputArrow);
+document.addEventListener("DOMContentLoaded", () => {
+    createMemoryRows();
+    createProgramRows();
+    createInputRows();
+    createOutputRows();
+    addBtnProgram();
+    addBtnMemory();
+    addArrow();
+    addArrowFunction();
+    addInputANDOutputArrow();
+});
 
 
 var programCurrentRow = "programRow0";
@@ -14,10 +16,11 @@ var memoryCurrentRow = "memoryRow0";
 var inputCurrentRow = "inputArrow1";
 var outputCurrentRow = "outputArrow1";
 
+
 function createMemoryRows(){
     const memoryTable = document.getElementById("MemoryTable");
     const tbody = memoryTable.querySelector("tbody");
-    for(var i = 0; i<50; i++){
+    for(var i = 0; i<49; i++){
         const row = document.createElement("tr");
         row.id = "memoryRow" + (i+2);
         const index = document.createElement("td");
@@ -41,7 +44,7 @@ function createMemoryRows(){
 function createProgramRows(){
     const programTable = document.getElementById("ProgramTable");
     const tbody = programTable.querySelector("tbody");
-    for(var i = 0; i<50; i++){
+    for(var i = 0; i<49; i++){
         const row = document.createElement("tr");
         row.id = "programRow" + (i+2);
 
@@ -84,12 +87,12 @@ function createInputRows(){
     const inputRow = document.getElementById("inputInputRow");
     const arrowRow = document.getElementById("inputArrowRow");
 
-    for(var i = 4; i <50;i++){
+    for(var i = 4; i <51;i++){
         const numTd = document.createElement("td");
         numTd.textContent = i;
         numRow.appendChild(numTd);
     }
-    for (var i = 4; i < 50; i++) {
+    for (var i = 4; i < 51; i++) {
         const inputTd = document.createElement("td");
         var input = document.createElement('input');
         input.type = 'number';
@@ -97,9 +100,9 @@ function createInputRows(){
         inputTd.appendChild(input);
         inputRow.appendChild(inputTd);
     }
-    for(var i = 4;i<50;i++){
+    for(var i = 4;i<51;i++){
         const arrowsTd = document.createElement("td");
-        numRow.appendChild(arrowsTd);
+        arrowRow.appendChild(arrowsTd);
     }
 }
 
@@ -108,12 +111,12 @@ function createOutputRows(){
     const inputRow = document.getElementById("outputInputRow");
     const arrowRow = document.getElementById("outputArrowRow");
 
-    for(var i = 4; i <50;i++){
+    for(var i = 4; i <51;i++){
         const numTd = document.createElement("td");
         numTd.textContent = i;
         numRow.appendChild(numTd);
     }
-    for (var i = 4; i < 50; i++) {
+    for (var i = 4; i < 51; i++) {
         const inputTd = document.createElement("td");
         var input = document.createElement('input');
         input.type = 'number';
@@ -121,9 +124,9 @@ function createOutputRows(){
         inputTd.appendChild(input);
         inputRow.appendChild(inputTd);
     }
-    for(var i = 4;i<50;i++){
+    for(var i = 4;i<51;i++){
         const arrowsTd = document.createElement("td");
-        numRow.appendChild(arrowsTd);
+        arrowRow.appendChild(arrowsTd);
     }
 }
 
@@ -242,9 +245,10 @@ function addRowProgram() {
     newRow.appendChild(argumentCell);
     newRow.appendChild(emptyCell);
 
-    tbody.appendChild(newRow);  // Row added to tbody
+    tbody.appendChild(newRow);
     addBtnProgram();
     addArrowFunction();
+    newRow.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 
@@ -273,6 +277,7 @@ function addRowMemory(){
 
     memoryTable.appendChild(newRow);
     addBtnMemory();
+    newRow.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 function addInputANDOutputArrow(){
@@ -281,6 +286,9 @@ function addInputANDOutputArrow(){
 
     inputTableCurrentRow.textContent = "⇧";
     outputTableCurrentRow.textContent = "⇧";
+
+}
+function changeInputANDOutputArrow(inputCurrentRow, outputCurrentRow){
 
 }
 
@@ -314,6 +322,14 @@ function runAll() {
             console.error("Unknown instruction: " + instruction + " at line " + (i - 2));
         }
     }
+    /*
+        NOWY POMYSŁ to poprostu sprawdzac na początku petli czy funkcja jest inna od halt,
+        a potem poprostu wyoływać funkcje step(), bo to nie ma sensu pisac wszytkiego jeszcze raz,
+        i bedziemy leciec porpostu dopóki instrukcja bedzie inna od ""(czyli nie pusta).
+        Plus po kazdym wyoałniu funkcji bedzmei zmienac strzlake (currentProgramRow) na nastepny wiersz,
+        to samo z input i output( jezeli były uzyte).
+        CHYBA najlepszy pomysł :)
+    */
 }
 
 function resetProgram(){
@@ -325,7 +341,7 @@ function resetProgram(){
     for (let i = 2; i < programTable.rows.length; i++) {
         const row = programTable.rows[i];
         row.cells[2].querySelector('input').value = "";
-        row.cells[3].querySelector('select').value = "STORE";
+        row.cells[3].querySelector('select').value = "";
         row.cells[4].querySelector('input').value = "";
     }
     
@@ -335,7 +351,7 @@ function resetProgram(){
     }
 
     if (inputTable.rows.length > 2) {
-        const inputRow = inputTable.rows[2];
+        const inputRow = inputTable.rows[1];
         for (let i = 0; i < inputRow.cells.length; i++) {
             const input = inputRow.cells[i].querySelector('input');
             if (input) input.value = "";
@@ -343,7 +359,7 @@ function resetProgram(){
     }
 
     if (outputTable.rows.length > 2) {
-        const inputRow = outputTable.rows[2];
+        const inputRow = outputTable.rows[1];
         for (let i = 0; i < inputRow.cells.length; i++) {
             const input = inputRow.cells[i].querySelector('input');
             if (input) input.value = "";

@@ -2,17 +2,28 @@ var Functions = {
     LOAD: function() { //Bartek
         console.log("LOAD");
         var programRow = document.getElementById(programCurrentRow);
-        var argument = programRow.cells[4].querySelector("input").value;
-        let argument1 = document.getElementById("memoryRow" + argument);
-
-        const argumentInput = argument1.querySelector("input");
-        let memoryTable1 = document.getElementById("MemoryTable");
-        const rows1 = memoryTable1.querySelectorAll("input");
-
-        const argument0 = rows1[0];
-        argument0.value = argumentInput.value;
-
+        var instruction = programRow.cells[3].querySelector("select");
+        var instructionValue = instruction.value;
+        var argument = programRow.cells[4].querySelector("input");
+        var argumentValue = argument.value;
+    
+        var instructionProcessor = document.getElementById("Instruction");
+        var argumentProcessor = document.getElementById("Argument");
+        Animation(instruction.id, instructionValue, instructionProcessor.id);
+        Animation(argument.id, argumentValue, argumentProcessor.id);
+    
+        var memoryInput = document.getElementById("memory" + argumentValue);
+        var memoryValue = memoryInput.value;
+    
+        var akumulatorInput = document.getElementById("memory0");
+    
+        Animation(memoryInput.id, memoryValue, akumulatorInput.id);
+    
+        setTimeout(() => {
+            akumulatorInput.value = memoryValue;
+        }, 1800);
     },
+    
     STORE: function() { //Eryk
         console.log("STORE");
         var akumulatorRow = document.getElementById("memoryRow0");
@@ -42,14 +53,32 @@ var Functions = {
     READ: function() {
         console.log("READ");
         var programRow = document.getElementById(programCurrentRow);
-        var argument = programRow.cells[4].querySelector("input").value;
-        let argument1 = document.getElementById("memoryRow" + argument);
-
-        const argumentInput = argument1.querySelector("input");
+        var instruction = programRow.cells[3].querySelector("select");
+        var instructionValue = instruction.value;
+        var argument = programRow.cells[4].querySelector("input");
+        var argumentValue = argument.value;
+    
+        var instructionProcessor = document.getElementById("Instruction");
+        var argumentProcessor = document.getElementById("Argument");
+        Animation(instruction.id, instructionValue, instructionProcessor.id);
+        Animation(argument.id, argumentValue, argumentProcessor.id);
+    
         const input = document.getElementById("input1");
-            
-        argumentInput.value = input.value;
+        const memoryInput = document.getElementById("memory" + argumentValue);
+
+        var indexInputCurrArrowRow = parseInt(inputCurrentRow[inputCurrentRow.length -1]);
+        document.getElementById(inputCurrentRow).textContent = "";
+        indexInputCurrArrowRow++;
+        inputCurrentRow = "inputArrow" + indexInputCurrArrowRow;
+        addInputANDOutputArrow();
+    
+        Animation(input.id, input.value, memoryInput.id);
+    
+        setTimeout(() => {
+            memoryInput.value = input.value;
+        }, 1800);
     },
+    
     WRITE: function() { //Eryk
         var programRow = document.getElementById(programCurrentRow);
         var instruction = programRow.cells[3].querySelector("select");
@@ -64,6 +93,13 @@ var Functions = {
 
         var memoryInput = document.getElementById("memory" + argumentValue);
         var memoryValue = memoryInput.value;
+
+        var indexOutputCurrArrowRow = parseInt(outputCurrentRow[outputCurrentRow.length -1]);
+        document.getElementById(outputCurrentRow).textContent = "";
+        console.log(indexOutputCurrArrowRow);
+        indexOutputCurrArrowRow++;
+        outputCurrentRow = "outputArrow" + indexOutputCurrArrowRow;
+        addInputANDOutputArrow();
         
         Animation(memoryInput.id, memoryValue, "output1");
     },
