@@ -57,27 +57,39 @@ var Functions = {
         var instructionValue = instruction.value;
         var argument = programRow.cells[4].querySelector("input");
         var argumentValue = argument.value;
-    
+
         var instructionProcessor = document.getElementById("Instruction");
         var argumentProcessor = document.getElementById("Argument");
         Animation(instruction.id, instructionValue, instructionProcessor.id);
         Animation(argument.id, argumentValue, argumentProcessor.id);
-    
-        const input = document.getElementById("input1");
+
+        const indexInputCurrentRow = parseInt(inputCurrentRow[inputCurrentRow.length - 1]);
+
+        const input = document.getElementById("input" + indexInputCurrentRow);
         const memoryInput = document.getElementById("memory" + argumentValue);
 
-        var indexInputCurrArrowRow = parseInt(inputCurrentRow[inputCurrentRow.length -1]);
-        document.getElementById(inputCurrentRow).textContent = "";
-        indexInputCurrArrowRow++;
-        inputCurrentRow = "inputArrow" + indexInputCurrArrowRow;
-        addInputANDOutputArrow();
-    
+        if (!input) {
+            console.error("Input element not found:", inputCurrentRow);
+            return;
+        }
+        if (!memoryInput) {
+            console.error("Memory input element not found: memory" + argumentValue);
+            return;
+        }
+
         Animation(input.id, input.value, memoryInput.id);
-    
+
         setTimeout(() => {
             memoryInput.value = input.value;
+
+            var indexInputCurrArrowRow = parseInt(inputCurrentRow.replace(/\D/g, ''), 10);
+            document.getElementById(inputCurrentRow).textContent = "";
+            indexInputCurrArrowRow++;
+            inputCurrentRow = "inputArrow" + indexInputCurrArrowRow;
+            addInputANDOutputArrow();
         }, 1800);
     },
+
     
     WRITE: function() { //Eryk
         var programRow = document.getElementById(programCurrentRow);
@@ -103,6 +115,7 @@ var Functions = {
         
         Animation(memoryInput.id, memoryValue, "output1");
     },
+    
     ADD: function() { //Bartek
         console.log("ADD");
         var programRow = document.getElementById(programCurrentRow);
