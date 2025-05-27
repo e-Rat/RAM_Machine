@@ -292,31 +292,7 @@ function addInputANDOutputArrow(){
 function changeInputANDOutputArrow(inputCurrentRow, outputCurrentRow){
 
 }
-function runStep() {
-    return new Promise((resolve) => {  
-        var row = document.getElementById(programCurrentRow);
-        var instruction = row.cells[3].querySelector("select").value;
 
-        const instructionFunction = Functions[instruction];
-        if (instructionFunction) {
-            instructionFunction();
-
-            setTimeout(() => {
-                var indexProgramCurrArrowRow = parseInt(programCurrentRow.replace('programRow', ''));
-                
-                indexProgramCurrArrowRow++;
-                programCurrentRow = "programRow" + indexProgramCurrArrowRow;
-
-                addArrow();  
-
-                resolve();
-            }, 1800);
-        } else {
-            console.error("Unknown instruction: " + instruction);
-            resolve();  
-        }
-    });
-}
 function runStep(){
     return new Promise((resolve) => {  
         var row = document.getElementById(programCurrentRow);
@@ -347,7 +323,7 @@ function runStep(){
 }
 async function runAll() {
     const table = document.getElementById("ProgramTable");
-    const rows = table.getElementsByTagName("tr");
+    const rows = table.querySelectorAll("tr");
 
     let currentRowIndex = 2;
 
@@ -357,6 +333,7 @@ async function runAll() {
         const instructionSelect = row.cells[3].querySelector("select");
 
         if (!instructionSelect) break;
+
 
         const instruction = instructionSelect.value.trim();
 
@@ -370,6 +347,7 @@ async function runAll() {
         currentRowIndex++;
     }
 }
+
 
 function resetProgram(){
     var programTable = document.getElementById("ProgramTable");
