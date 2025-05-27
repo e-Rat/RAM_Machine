@@ -49,6 +49,7 @@ function createProgramRows(){
         row.id = "programRow" + (i+2);
 
         const blank = document.createElement("td");
+        blank.id = "programArrow" + (i+2);
 
         const index = document.createElement("td");
         index.textContent = i + 2;
@@ -292,7 +293,7 @@ function changeInputANDOutputArrow(inputCurrentRow, outputCurrentRow){
 
 }
 
-function runStep() {
+function runStep(){
     return new Promise((resolve) => {  
         var row = document.getElementById(programCurrentRow);
         var instruction = row.cells[3].querySelector("select").value;
@@ -302,43 +303,46 @@ function runStep() {
             instructionFunction();
 
             setTimeout(() => {
-                var indexProgramCurrArrowRow = parseInt(programCurrentRow.replace('programRow', ''));
-                
-                indexProgramCurrArrowRow++;
-                programCurrentRow = "programRow" + indexProgramCurrArrowRow;
+            var indexProgramCurrArrowRow = parseInt(programCurrentRow[programCurrentRow.length -1]);
+            console.log(indexProgramCurrArrowRow);
+            var arrowRow = document.getElementById("programArrow" + indexProgramCurrArrowRow);
+            console.log("programArrow" + indexProgramCurrArrowRow);
+            arrowRow.textContent = "";
+            indexProgramCurrArrowRow++;
+            programCurrentRow = "programRow" + indexProgramCurrArrowRow;
 
-                addArrow();  
-
-                resolve();
-            }, 1800);
+            addArrow();
+            resolve();
+            
+        }, 1800);
         } else {
             console.error("Unknown instruction: " + instruction);
             resolve();  
         }
     });
 }
-
 async function runAll() {
     const table = document.getElementById("ProgramTable");
     const rows = table.querySelectorAll("tr");
 
-    let currentRowIndex = 2; 
+    let currentRowIndex = 2;
 
-    while (currentRowIndex < rows.length) {
+
+    while(currentRowIndex < rows.length){
         const row = rows[currentRowIndex];
         const instructionSelect = row.cells[3].querySelector("select");
 
-        if (!instructionSelect) break;  
+        if (!instructionSelect) break;
+
 
         const instruction = instructionSelect.value.trim();
 
         if (instruction === "HALT" || instruction === "") {
-            console.log("Execution halted at row " + currentRowIndex);
+            console.log("Extecution halted at row " + currentRowIndex);
             break;
         }
 
-       
-        await runStep();  
+        await runStep();
 
         currentRowIndex++;
     }
