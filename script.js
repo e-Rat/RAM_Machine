@@ -292,45 +292,58 @@ function changeInputANDOutputArrow(inputCurrentRow, outputCurrentRow){
 
 }
 
-function runStep(){
-    var row = document.getElementById(programCurrentRow);
-    var instruction = row.cells[3].querySelector("select").value;
+function runStep() {
+    return new Promise((resolve) => {  
+        var row = document.getElementById(programCurrentRow);
+        var instruction = row.cells[3].querySelector("select").value;
 
-    const instructionFunction = Functions[instruction];
-    if (instructionFunction) {
-        instructionFunction();
-    } else {
-        console.error("Unknown instruction: " + instruction);
-    }
-}
-function runAll() {
-    const table = document.getElementById("ProgramTable");
-    const rows = table.getElementsByTagName("tr");
-
-    for (let i = 2; i < rows.length; i++) {
-        const row = rows[i];
-        const instructionSelect = row.cells[3].querySelector("select");
-        if (!instructionSelect) continue;
-
-        const instruction = instructionSelect.value.trim();
         const instructionFunction = Functions[instruction];
-        if (instruction === "HALT") break;
-
         if (instructionFunction) {
             instructionFunction();
-        }else{
-            console.error("Unknown instruction: " + instruction + " at line " + (i - 2));
+
+            setTimeout(() => {
+                var indexProgramCurrArrowRow = parseInt(programCurrentRow.replace('programRow', ''));
+                
+                indexProgramCurrArrowRow++;
+                programCurrentRow = "programRow" + indexProgramCurrArrowRow;
+
+                addArrow();  
+
+                resolve();
+            }, 1800);
+        } else {
+            console.error("Unknown instruction: " + instruction);
+            resolve();  
         }
-    }
-    /*
-        NOWY POMYSŁ to poprostu sprawdzac na początku petli czy funkcja jest inna od halt,
-        a potem poprostu wyoływać funkcje step(), bo to nie ma sensu pisac wszytkiego jeszcze raz,
-        i bedziemy leciec porpostu dopóki instrukcja bedzie inna od ""(czyli nie pusta).
-        Plus po kazdym wyoałniu funkcji bedzmei zmienac strzlake (currentProgramRow) na nastepny wiersz,
-        to samo z input i output( jezeli były uzyte).
-        CHYBA najlepszy pomysł :)
-    */
+    });
 }
+
+async function runAll() {
+    const table = document.getElementById("ProgramTable");
+    const rows = table.querySelectorAll("tr");
+
+    let currentRowIndex = 2; 
+
+    while (currentRowIndex < rows.length) {
+        const row = rows[currentRowIndex];
+        const instructionSelect = row.cells[3].querySelector("select");
+
+        if (!instructionSelect) break;  
+
+        const instruction = instructionSelect.value.trim();
+
+        if (instruction === "HALT" || instruction === "") {
+            console.log("Execution halted at row " + currentRowIndex);
+            break;
+        }
+
+       
+        await runStep();  
+
+        currentRowIndex++;
+    }
+}
+
 
 function resetProgram(){
     var programTable = document.getElementById("ProgramTable");
