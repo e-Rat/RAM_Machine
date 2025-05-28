@@ -289,10 +289,6 @@ function addInputANDOutputArrow(){
     outputTableCurrentRow.textContent = "⇧";
 
 }
-function changeInputANDOutputArrow(inputCurrentRow, outputCurrentRow){
-
-}
-
 function runStep(){
     return new Promise((resolve) => {  
         var row = document.getElementById(programCurrentRow);
@@ -301,20 +297,27 @@ function runStep(){
         const instructionFunction = Functions[instruction];
         if (instructionFunction) {
             instructionFunction();
+            if(instruction !== "JUMP" && instruction !== "JZERO" && instruction !== "JGTZ"){
+                setTimeout(() => {
+                    var indexProgramCurrArrowRow = parseInt(programCurrentRow[programCurrentRow.length -1]);
+                    var arrowRow = document.getElementById("programArrow" + indexProgramCurrArrowRow);
+                    console.log("programArrow" + indexProgramCurrArrowRow);
+                    arrowRow.textContent = "";
+                    indexProgramCurrArrowRow++;
+                    programCurrentRow = "programRow" + indexProgramCurrArrowRow;
 
-            setTimeout(() => {
-            var indexProgramCurrArrowRow = parseInt(programCurrentRow[programCurrentRow.length -1]);
-            console.log(indexProgramCurrArrowRow);
-            var arrowRow = document.getElementById("programArrow" + indexProgramCurrArrowRow);
-            console.log("programArrow" + indexProgramCurrArrowRow);
-            arrowRow.textContent = "";
-            indexProgramCurrArrowRow++;
-            programCurrentRow = "programRow" + indexProgramCurrArrowRow;
-
-            addArrow();
-            resolve();
-            
-        }, 1800);
+                    addArrow();
+                    resolve();
+                    }
+                , 1800);
+            }
+            else{
+                setTimeout(() => {
+                    addArrow();
+                    resolve();
+                    }
+                , 1800);
+            }
         } else {
             console.error("Unknown instruction: " + instruction);
             resolve();  
@@ -341,13 +344,25 @@ async function runAll() {
             console.log("Extecution halted at row " + currentRowIndex);
             break;
         }
+        else if(instruction === "JUMP" || instruction === "JZERO" || instruction === "JGTZ"){
+            const instructionFunction = Functions[instruction];
+            instructionFunction();
+        }
 
         await runStep();
 
         currentRowIndex++;
     }
 }
-
+function checkLabels(label){
+    const inputs = programTable.querySelectorAll("input");
+    for(var i  = 0; i< inputs.length; i += 2){
+        console.log(inputs[i].id);
+        if(inputs[i].value === label) return inputs[i].id;
+    }
+    alert("Brak label o takiej zawartosci");
+    return "";
+}
 
 function resetProgram(){
     var programTable = document.getElementById("ProgramTable");

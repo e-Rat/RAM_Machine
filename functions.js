@@ -214,13 +214,81 @@ var Functions = {
         }, 1800);
     },
     JUMP: function() { //Bartek
-        console.log("JUMP");
+        var programRow = document.getElementById(programCurrentRow);
+        var instruction = programRow.cells[3].querySelector("select");
+        var instructionValue = instruction.value;
+        var argument = programRow.cells[4].querySelector("input");
+        var argumentValue = argument.value;
+        console.log(argumentValue);
+        var akumulatorValue = document.getElementById("memory0").value;
+
+        var instructionProcessor = document.getElementById("Instruction");
+        var argumentProcessor = document.getElementById("Argument");
+        Animation(instruction.id, instructionValue, instructionProcessor.id);
+        Animation(argument.id, argumentValue, argumentProcessor.id);
+
+        setTimeout(() => {
+            var label = checkLabels(argumentValue);
+            console.log(label);
+            var programIndex = programCurrentRow[programCurrentRow.length - 1];
+            const programArrow = document.getElementById("programArrow" + programIndex);
+            programArrow.textContent = "";
+            programCurrentRow = "programRow" + label[label.length - 1];
+        }, 1800);
     },
     JZERO: function() { //Eryk
         console.log("JZERO");
+        var programRow = document.getElementById(programCurrentRow);
+        var instruction = programRow.cells[3].querySelector("select");
+        var instructionValue = instruction.value;
+        var argument = programRow.cells[4].querySelector("input");
+        var argumentValue = argument.value;
+        console.log(argumentValue);
+        var akumulatorValue = document.getElementById("memory0").value;
+
+        var instructionProcessor = document.getElementById("Instruction");
+        var argumentProcessor = document.getElementById("Argument");
+        Animation(instruction.id, instructionValue, instructionProcessor.id);
+        Animation(argument.id, argumentValue, argumentProcessor.id);
+
+        if(akumulatorValue == 0){
+            setTimeout(() => {
+                var label = checkLabels(argumentValue);
+                console.log(label);
+                var programIndex = programCurrentRow[programCurrentRow.length - 1];
+                const programArrow = document.getElementById("programArrow" + programIndex);
+                programArrow.textContent = "";
+                programCurrentRow = "programRow" + label[label.length - 1];
+            }, 1800);
+            
+        }
     },
     JGTZ: function() { //Eryk
         console.log("JGTZ");
+        var programRow = document.getElementById(programCurrentRow);
+        var instruction = programRow.cells[3].querySelector("select");
+        var instructionValue = instruction.value;
+        var argument = programRow.cells[4].querySelector("input");
+        var argumentValue = argument.value;
+        console.log(argumentValue);
+        var akumulatorValue = document.getElementById("memory0").value;
+
+        var instructionProcessor = document.getElementById("Instruction");
+        var argumentProcessor = document.getElementById("Argument");
+        Animation(instruction.id, instructionValue, instructionProcessor.id);
+        Animation(argument.id, argumentValue, argumentProcessor.id);
+
+        if(akumulatorValue > 0){
+            setTimeout(() => {
+                var label = checkLabels(argumentValue);
+                console.log(label);
+                var programIndex = programCurrentRow[programCurrentRow.length - 1];
+                const programArrow = document.getElementById("programArrow" + programIndex);
+                programArrow.textContent = "";
+                programCurrentRow = "programRow" + label[label.length - 1];
+            }, 1800);
+            
+        }
     },
     HALT: function() { //Bartek
         console.log("HALT");
