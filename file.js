@@ -65,13 +65,13 @@ function importProgram(event) {
                     const row = table.rows[rowIndex];
 
                     row.cells[1].innerText = lineNumber || '';   
-                    row.cells[2].querySelector('input').value = label || '';  
+                    row.cells[2].querySelector('input').value = label == '_' ? '' : label;  
                     row.cells[3].querySelector('select').value = instruction || '';  
                     row.cells[4].querySelector('input').value = argument || ''; 
                 } else {
                     const newRow = table.insertRow(rowIndex);
                     newRow.insertCell(0).innerText = '';  
-                    newRow.insertCell(1).innerText = lineNumber || '';  
+                    newRow.insertCell(1).innerText = lineNumber || '';
                     newRow.insertCell(2).innerHTML = `<input type="text" value="${label || ''}">`;
                     newRow.insertCell(3).innerHTML = `<select><option value="${instruction || ''}" selected>${instruction || ''}</option></select>`; 
                     newRow.insertCell(4).innerHTML = `<input type="text" value="${argument || ''}">`; 

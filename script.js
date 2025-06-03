@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     addArrow();
     addArrowFunction();
     addInputANDOutputArrow();
+    addInputArrowFunction();
+    addOutputArrowFunction();
 });
 
 
@@ -67,7 +69,7 @@ function createProgramRows(){
 
         const td3 = document.createElement("td");
         const inputArgument = document.createElement("input");
-        inputArgument.type = 'number';
+        inputArgument.type = 'text';
         inputArgument.id = "argument" + (i+2);
         td3.appendChild(inputArgument);
 
@@ -287,7 +289,49 @@ function addInputANDOutputArrow(){
 
     inputTableCurrentRow.textContent = "⇧";
     outputTableCurrentRow.textContent = "⇧";
+}
 
+// --- New functions for input and output arrow selection ---
+function changeInputRow(event) {
+    if (event.target.tagName === "BUTTON" || event.target.tagName === "INPUT" || event.target.tagName === "SELECT") {
+        return;
+    }
+    const clickedCell = event.currentTarget;
+    const arrowRow = document.getElementById("inputArrowRow");
+    for (let i = 0; i < arrowRow.cells.length; i++) {
+        arrowRow.cells[i].textContent = "";
+    }
+    clickedCell.textContent = "⇧";
+    inputCurrentRow = clickedCell.id;
+    console.log("inputCurrentRow:", inputCurrentRow);
+}
+
+function addInputArrowFunction() {
+    const arrowRow = document.getElementById("inputArrowRow");
+    for (let i = 0; i < arrowRow.cells.length; i++) {
+        arrowRow.cells[i].addEventListener("click", changeInputRow);
+    }
+}
+
+function changeOutputRow(event) {
+    if (event.target.tagName === "BUTTON" || event.target.tagName === "INPUT" || event.target.tagName === "SELECT") {
+        return;
+    }
+    const clickedCell = event.currentTarget;
+    const arrowRow = document.getElementById("outputArrowRow");
+    for (let i = 0; i < arrowRow.cells.length; i++) {
+        arrowRow.cells[i].textContent = "";
+    }
+    clickedCell.textContent = "⇧";
+    outputCurrentRow = clickedCell.id;
+    console.log("outputCurrentRow:", outputCurrentRow);
+}
+
+function addOutputArrowFunction() {
+    const arrowRow = document.getElementById("outputArrowRow");
+    for (let i = 0; i < arrowRow.cells.length; i++) {
+        arrowRow.cells[i].addEventListener("click", changeOutputRow);
+    }
 }
 function runStep(){
     return new Promise((resolve) => {  
@@ -299,7 +343,7 @@ function runStep(){
             instructionFunction();
             if(instruction !== "JUMP" && instruction !== "JZERO" && instruction !== "JGTZ"){
                 setTimeout(() => {
-                    var indexProgramCurrArrowRow = parseInt(programCurrentRow[programCurrentRow.length -1]);
+                    var indexProgramCurrArrowRow = parseInt(programCurrentRow.replace(/\D/g, ''));
                     var arrowRow = document.getElementById("programArrow" + indexProgramCurrArrowRow);
                     console.log("programArrow" + indexProgramCurrArrowRow);
                     arrowRow.textContent = "";
@@ -328,30 +372,21 @@ async function runAll() {
     const table = document.getElementById("ProgramTable");
     const rows = table.querySelectorAll("tr");
 
-    let currentRowIndex = 2;
-
-
-    while(currentRowIndex < rows.length){
-        const row = rows[currentRowIndex];
-        const instructionSelect = row.cells[3].querySelector("select");
+    while (true) {
+        const index = parseInt(programCurrentRow.replace(/\D/g, ''));
+        const row = document.getElementById("programRow" + index);
+        const instructionSelect = row?.cells[3]?.querySelector("select");
 
         if (!instructionSelect) break;
-
 
         const instruction = instructionSelect.value.trim();
 
         if (instruction === "HALT" || instruction === "") {
-            console.log("Extecution halted at row " + currentRowIndex);
+            console.log("Execution halted at row " + index);
             break;
-        }
-        else if(instruction === "JUMP" || instruction === "JZERO" || instruction === "JGTZ"){
-            const instructionFunction = Functions[instruction];
-            instructionFunction();
         }
 
         await runStep();
-
-        currentRowIndex++;
     }
 }
 function checkLabels(label){
