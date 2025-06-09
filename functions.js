@@ -6,19 +6,28 @@ var Functions = {
         var instructionValue = instruction.value;
         var argument = programRow.cells[4].querySelector("input");
         var argumentValue = argument.value;
-    
+
         var instructionProcessor = document.getElementById("Instruction");
         var argumentProcessor = document.getElementById("Argument");
         Animation(instruction.id, instructionValue, instructionProcessor.id);
         Animation(argument.id, argumentValue, argumentProcessor.id);
-    
+
         var memoryInput = document.getElementById("memory" + argumentValue);
+        // Handle direct value assignment (e.g., "=1")
+        if(argumentValue[0] === "="){
+            var num = parseInt(argumentValue.slice(1));
+            var akumulatorInput = document.getElementById("memory0");
+            setTimeout(() => {
+                akumulatorInput.value = num;
+            }, 1800);
+            return;
+        }
         var memoryValue = memoryInput.value;
-    
+
         var akumulatorInput = document.getElementById("memory0");
-    
+
         Animation(memoryInput.id, memoryValue, akumulatorInput.id);
-    
+
         setTimeout(() => {
             akumulatorInput.value = memoryValue;
         }, 1800);
@@ -134,7 +143,7 @@ var Functions = {
             var memoryInput = document.getElementById("memory" + argumentValue);
             var memoryValue = memoryInput.value;
             var akumulatorInput = document.getElementById("memory0");
-            var result = Math.floor(parseInt(akumulatorInput.value) + memoryValue);
+            var result = Math.floor(parseInt(akumulatorInput.value) + parseInt(memoryValue));
             console.log(result)
     
             Animation(memoryInput.id, memoryValue, akumulatorInput.id);
@@ -146,7 +155,7 @@ var Functions = {
         else{
             var num = parseInt(argumentValue.slice(1));
             var akumulatorInput = document.getElementById("memory0");
-            var result = Math.floor(parseInt(akumulatorInput.value) + num);
+            var result = Math.floor(parseInt(akumulatorInput.value) + parseInt(num));
             console.log(result)
 
             setTimeout(() => {
@@ -171,7 +180,7 @@ var Functions = {
             var memoryInput = document.getElementById("memory" + argumentValue);
             var memoryValue = memoryInput.value;
             var akumulatorInput = document.getElementById("memory0");
-            var result = Math.floor(parseInt(akumulatorInput.value) - memoryValue);
+            var result = Math.floor(parseInt(akumulatorInput.value) - parseInt(memoryValue));
             console.log(result)
     
             Animation(memoryInput.id, memoryValue, akumulatorInput.id);
@@ -183,7 +192,7 @@ var Functions = {
         else{
             var num = parseInt(argumentValue.slice(1));
             var akumulatorInput = document.getElementById("memory0");
-            var result = Math.floor(parseInt(akumulatorInput.value) - num);
+            var result = Math.floor(parseInt(akumulatorInput.value) -  parseInt(num));
             console.log(result)
 
             setTimeout(() => {
@@ -208,7 +217,7 @@ var Functions = {
             var memoryInput = document.getElementById("memory" + argumentValue);
             var memoryValue = memoryInput.value;
             var akumulatorInput = document.getElementById("memory0");
-            var result = Math.floor(parseInt(akumulatorInput.value) * memoryValue);
+            var result = Math.floor(parseInt(akumulatorInput.value) * parseInt(memoryValue));
             console.log(result)
     
             Animation(memoryInput.id, memoryValue, akumulatorInput.id);
@@ -220,7 +229,7 @@ var Functions = {
         else{
             var num = parseInt(argumentValue.slice(1));
             var akumulatorInput = document.getElementById("memory0");
-            var result = Math.floor(parseInt(akumulatorInput.value) * num);
+            var result = Math.floor(parseInt(akumulatorInput.value) *  parseInt(num));
             console.log(result)
 
             setTimeout(() => {
@@ -246,7 +255,7 @@ var Functions = {
             var memoryInput = document.getElementById("memory" + argumentValue);
             var memoryValue = memoryInput.value;
             var akumulatorInput = document.getElementById("memory0");
-            var result = Math.floor(parseInt(akumulatorInput.value) / memoryValue);
+            var result = Math.floor(parseInt(akumulatorInput.value) / parseInt(memoryValue));
             console.log(result)
     
             Animation(memoryInput.id, memoryValue, akumulatorInput.id);
@@ -262,7 +271,7 @@ var Functions = {
                 var result = 0;
             } 
             else {
-                var result = Math.floor(parseInt(akumulatorInput.value) / num);
+                var result = Math.floor(parseInt(akumulatorInput.value) / parseInt(num));
             }
             console.log(result)
 
