@@ -92,6 +92,7 @@ var Functions = {
 
     
     WRITE: function() { //Eryk
+        
         var programRow = document.getElementById(programCurrentRow);
         var instruction = programRow.cells[3].querySelector("select");
         var instructionValue = instruction.value;
@@ -113,7 +114,7 @@ var Functions = {
         outputCurrentRow = "outputArrow" + indexOutputCurrArrowRow;
         addInputANDOutputArrow();
         
-        Animation(memoryInput.id, memoryValue, "output1");
+        Animation(memoryInput.id, memoryValue, `output${indexOutputCurrArrowRow-1}`);
     },
     
     ADD: function() { //Bartek
