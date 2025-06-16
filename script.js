@@ -105,6 +105,7 @@ function createInputRows(){
     }
     for(var i = 4;i<51;i++){
         const arrowsTd = document.createElement("td");
+        arrowsTd.id = `inputArrow${i}`;
         arrowRow.appendChild(arrowsTd);
     }
 }
@@ -286,6 +287,8 @@ function addRowMemory(){
 function addInputANDOutputArrow(){
     var inputTableCurrentRow = document.getElementById(inputCurrentRow);
     var outputTableCurrentRow = document.getElementById(outputCurrentRow);
+
+    console.log(inputCurrentRow + " " + outputCurrentRow);
 
     inputTableCurrentRow.textContent = "⇧";
     outputTableCurrentRow.textContent = "⇧";
