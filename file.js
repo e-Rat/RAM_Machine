@@ -44,3 +44,49 @@ function exportProgram() {
         URL.revokeObjectURL(url);
     }
 }
+function importProgram(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const content = e.target.result;
+        const lines = content.split('\n').filter(line => line.trim() !== "");
+
+        const table = document.getElementById("ProgramTable");
+        let rowIndex = 2; 
+
+        lines.forEach((line, index) => {
+            const parts = line.split(' ').filter(part => part.trim() !== "");
+            if (parts.length === 4) {
+                const [lineNumber, label, instruction, argument] = parts;
+
+                if (rowIndex < table.rows.length) {
+                    const row = table.rows[rowIndex];
+
+                    row.cells[1].innerText = lineNumber || '';   
+                    row.cells[2].querySelector('input').value = label == '_' ? '' : label;  
+                    row.cells[3].querySelector('select').value = instruction || '';  
+                    row.cells[4].querySelector('input').value = argument || ''; 
+                } else {
+                    const newRow = table.insertRow(rowIndex);
+                    newRow.insertCell(0).innerText = '';  
+                    newRow.insertCell(1).innerText = lineNumber || '';
+                    newRow.insertCell(2).innerHTML = `<input type="text" value="${label || ''}">`;
+                    newRow.insertCell(3).innerHTML = `<select><option value="${instruction || ''}" selected>${instruction || ''}</option></select>`; 
+                    newRow.insertCell(4).innerHTML = `<input type="text" value="${argument || ''}">`; 
+                }
+
+                rowIndex++;
+            }
+        });
+
+        alert("Import zakończony pomyślnie!");
+    };
+
+    reader.readAsText(file);
+}
+
+document.getElementById("fileInput").addEventListener("change", importProgram);
+
+

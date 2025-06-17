@@ -6,19 +6,28 @@ var Functions = {
         var instructionValue = instruction.value;
         var argument = programRow.cells[4].querySelector("input");
         var argumentValue = argument.value;
-    
+
         var instructionProcessor = document.getElementById("Instruction");
         var argumentProcessor = document.getElementById("Argument");
         Animation(instruction.id, instructionValue, instructionProcessor.id);
         Animation(argument.id, argumentValue, argumentProcessor.id);
-    
+
         var memoryInput = document.getElementById("memory" + argumentValue);
+        // Handle direct value assignment (e.g., "=1")
+        if(argumentValue[0] === "="){
+            var num = parseInt(argumentValue.slice(1));
+            var akumulatorInput = document.getElementById("memory0");
+            setTimeout(() => {
+                akumulatorInput.value = num;
+            }, 1800);
+            return;
+        }
         var memoryValue = memoryInput.value;
-    
+
         var akumulatorInput = document.getElementById("memory0");
-    
+
         Animation(memoryInput.id, memoryValue, akumulatorInput.id);
-    
+
         setTimeout(() => {
             akumulatorInput.value = memoryValue;
         }, 1800);
@@ -63,7 +72,7 @@ var Functions = {
         Animation(instruction.id, instructionValue, instructionProcessor.id);
         Animation(argument.id, argumentValue, argumentProcessor.id);
 
-        const indexInputCurrentRow = parseInt(inputCurrentRow[inputCurrentRow.length - 1]);
+        const indexInputCurrentRow = parseInt(inputCurrentRow.replace(/\D/g, ''));
 
         const input = document.getElementById("input" + indexInputCurrentRow);
         const memoryInput = document.getElementById("memory" + argumentValue);
@@ -92,6 +101,7 @@ var Functions = {
 
     
     WRITE: function() { //Eryk
+        
         var programRow = document.getElementById(programCurrentRow);
         var instruction = programRow.cells[3].querySelector("select");
         var instructionValue = instruction.value;
@@ -106,14 +116,14 @@ var Functions = {
         var memoryInput = document.getElementById("memory" + argumentValue);
         var memoryValue = memoryInput.value;
 
-        var indexOutputCurrArrowRow = parseInt(outputCurrentRow[outputCurrentRow.length -1]);
+        var indexOutputCurrArrowRow = parseInt(outputCurrentRow.replace(/\D/g, ''));
         document.getElementById(outputCurrentRow).textContent = "";
         console.log(indexOutputCurrArrowRow);
         indexOutputCurrArrowRow++;
         outputCurrentRow = "outputArrow" + indexOutputCurrArrowRow;
         addInputANDOutputArrow();
         
-        Animation(memoryInput.id, memoryValue, "output1");
+        Animation(memoryInput.id, memoryValue, `output${indexOutputCurrArrowRow-1}`);
     },
     
     ADD: function() { //Bartek
@@ -129,16 +139,29 @@ var Functions = {
         Animation(instruction.id, instructionValue, instructionProcessor.id);
         Animation(argument.id, argumentValue, argumentProcessor.id);
 
-        var memoryInput = document.getElementById("memory" + argumentValue);
-        var memoryValue = parseInt(memoryInput.value);
-        var akumulatorInput = document.getElementById("memory0");
-        var result = Math.floor(parseInt(akumulatorInput.value) + memoryValue);
-        console.log(result)
-        Animation(memoryInput.id, memoryValue, akumulatorInput.id)
+        if(argumentValue[0] !== "="){
+            var memoryInput = document.getElementById("memory" + argumentValue);
+            var memoryValue = memoryInput.value;
+            var akumulatorInput = document.getElementById("memory0");
+            var result = Math.floor(parseInt(akumulatorInput.value) + parseInt(memoryValue));
+            console.log(result)
+    
+            Animation(memoryInput.id, memoryValue, akumulatorInput.id);
+    
+            setTimeout(() => {
+                akumulatorInput.value = result;
+            }, 1800);
+        }
+        else{
+            var num = parseInt(argumentValue.slice(1));
+            var akumulatorInput = document.getElementById("memory0");
+            var result = Math.floor(parseInt(akumulatorInput.value) + parseInt(num));
+            console.log(result)
 
-        setTimeout(() => {
-           akumulatorInput.value = result;
-        }, 1800);
+            setTimeout(() => {
+                akumulatorInput.value = result;
+            }, 1800);
+        }
     },
     SUB: function() { //Eryk
         console.log("SUB");
@@ -153,16 +176,29 @@ var Functions = {
         Animation(instruction.id, instructionValue, instructionProcessor.id);
         Animation(argument.id, argumentValue, argumentProcessor.id);
 
-        var memoryInput = document.getElementById("memory" + argumentValue);
-        var memoryValue = memoryInput.value;
-        var akumulatorInput = document.getElementById("memory0");
-        var result = Math.floor(parseInt(akumulatorInput.value) - memoryValue);
-        //DO eryka zobacz jak zrobilem add i zrob tak samo bo odejmuje ci to jako stringa
-        Animation(memoryInput.id, memoryValue, akumulatorInput.id)
-        
-        setTimeout(() => {
-            akumulatorInput.value = result;
-        }, 1800);
+        if(argumentValue[0] !== "="){
+            var memoryInput = document.getElementById("memory" + argumentValue);
+            var memoryValue = memoryInput.value;
+            var akumulatorInput = document.getElementById("memory0");
+            var result = Math.floor(parseInt(akumulatorInput.value) - parseInt(memoryValue));
+            console.log(result)
+    
+            Animation(memoryInput.id, memoryValue, akumulatorInput.id);
+    
+            setTimeout(() => {
+                akumulatorInput.value = result;
+            }, 1800);
+        }
+        else{
+            var num = parseInt(argumentValue.slice(1));
+            var akumulatorInput = document.getElementById("memory0");
+            var result = Math.floor(parseInt(akumulatorInput.value) -  parseInt(num));
+            console.log(result)
+
+            setTimeout(() => {
+                akumulatorInput.value = result;
+            }, 1800);
+        }
     },
     MULT: function() { //Bartek
         console.log("MULT");
@@ -177,17 +213,30 @@ var Functions = {
         Animation(instruction.id, instructionValue, instructionProcessor.id);
         Animation(argument.id, argumentValue, argumentProcessor.id);
 
-        var memoryInput = document.getElementById("memory" + argumentValue);
-        var memoryValue = memoryInput.value;
-        var akumulatorInput = document.getElementById("memory0");
-        var result = Math.floor(parseInt(akumulatorInput.value) * memoryValue);
-        console.log(result)
+        if(argumentValue[0] !== "="){
+            var memoryInput = document.getElementById("memory" + argumentValue);
+            var memoryValue = memoryInput.value;
+            var akumulatorInput = document.getElementById("memory0");
+            var result = Math.floor(parseInt(akumulatorInput.value) * parseInt(memoryValue));
+            console.log(result)
+    
+            Animation(memoryInput.id, memoryValue, akumulatorInput.id);
+    
+            setTimeout(() => {
+                akumulatorInput.value = result;
+            }, 1800);
+        }
+        else{
+            var num = parseInt(argumentValue.slice(1));
+            var akumulatorInput = document.getElementById("memory0");
+            var result = Math.floor(parseInt(akumulatorInput.value) *  parseInt(num));
+            console.log(result)
 
-        Animation(memoryInput.id, memoryValue, akumulatorInput.id);
-
-        setTimeout(() => {
-            akumulatorInput.value = result;
-        }, 1800);
+            setTimeout(() => {
+                akumulatorInput.value = result;
+            }, 1800);
+        }
+        
     },
     DIV: function() { //Eryk
         console.log("DIV");
@@ -202,16 +251,34 @@ var Functions = {
         Animation(instruction.id, instructionValue, instructionProcessor.id);
         Animation(argument.id, argumentValue, argumentProcessor.id);
 
-        var memoryInput = document.getElementById("memory" + argumentValue);
-        var memoryValue = memoryInput.value;
-        var akumulatorInput = document.getElementById("memory0");
-        var result = Math.floor(parseInt(akumulatorInput.value) / memoryValue);
+        if(argumentValue[0] !== "="){
+            var memoryInput = document.getElementById("memory" + argumentValue);
+            var memoryValue = memoryInput.value;
+            var akumulatorInput = document.getElementById("memory0");
+            var result = Math.floor(parseInt(akumulatorInput.value) / parseInt(memoryValue));
+            console.log(result)
+    
+            Animation(memoryInput.id, memoryValue, akumulatorInput.id);
+    
+            setTimeout(() => {
+                akumulatorInput.value = result;
+            }, 1800);
+        }
+        else{
+            var num = parseInt(argumentValue.slice(1));
+            var akumulatorInput = document.getElementById("memory0");
+            if(num == 0){
+                var result = 0;
+            } 
+            else {
+                var result = Math.floor(parseInt(akumulatorInput.value) / parseInt(num));
+            }
+            console.log(result)
 
-        Animation(memoryInput.id, memoryValue, akumulatorInput.id)
-        
-        setTimeout(() => {
-            akumulatorInput.value = result;
-        }, 1800);
+            setTimeout(() => {
+                akumulatorInput.value = result;
+            }, 1800);
+        }
     },
     JUMP: function() { //Bartek
         var programRow = document.getElementById(programCurrentRow);
@@ -230,10 +297,10 @@ var Functions = {
         setTimeout(() => {
             var label = checkLabels(argumentValue);
             console.log(label);
-            var programIndex = programCurrentRow[programCurrentRow.length - 1];
+            var programIndex = parseInt(programCurrentRow.replace(/\D/g, ''));
             const programArrow = document.getElementById("programArrow" + programIndex);
             programArrow.textContent = "";
-            programCurrentRow = "programRow" + label[label.length - 1];
+            programCurrentRow = "programRow" + label.replace(/\D/g, '');
         }, 1800);
     },
     JZERO: function() { //Eryk
@@ -251,16 +318,23 @@ var Functions = {
         Animation(instruction.id, instructionValue, instructionProcessor.id);
         Animation(argument.id, argumentValue, argumentProcessor.id);
 
-        if(akumulatorValue == 0){
+        if (akumulatorValue === '0'){
             setTimeout(() => {
                 var label = checkLabels(argumentValue);
                 console.log(label);
-                var programIndex = programCurrentRow[programCurrentRow.length - 1];
+                var programIndex = parseInt(programCurrentRow.replace(/\D/g, ''));
                 const programArrow = document.getElementById("programArrow" + programIndex);
                 programArrow.textContent = "";
-                programCurrentRow = "programRow" + label[label.length - 1];
+                programCurrentRow = "programRow" + label.replace(/\D/g, '');
             }, 1800);
-            
+        }
+        else {
+            setTimeout(() => {
+                var programIndex = parseInt(programCurrentRow.replace(/\D/g, ''));
+                const programArrow = document.getElementById("programArrow" + programIndex);
+                programArrow.textContent = "";
+                programCurrentRow = "programRow" + (programIndex + 1);
+            }, 1800);
         }
     },
     JGTZ: function() { //Eryk
@@ -278,16 +352,23 @@ var Functions = {
         Animation(instruction.id, instructionValue, instructionProcessor.id);
         Animation(argument.id, argumentValue, argumentProcessor.id);
 
-        if(akumulatorValue > 0){
+        if(parseInt(akumulatorValue) > 0){
             setTimeout(() => {
                 var label = checkLabels(argumentValue);
                 console.log(label);
-                var programIndex = programCurrentRow[programCurrentRow.length - 1];
+                var programIndex = parseInt(programCurrentRow.replace(/\D/g, ''));
                 const programArrow = document.getElementById("programArrow" + programIndex);
                 programArrow.textContent = "";
-                programCurrentRow = "programRow" + label[label.length - 1];
+                programCurrentRow = "programRow" + label.replace(/\D/g, '');
             }, 1800);
-            
+        }
+        else {
+            var indexProgramCurrArrowRow = parseInt(programCurrentRow.replace(/\D/g, ''));
+            var arrowRow = document.getElementById("programArrow" + indexProgramCurrArrowRow);
+            console.log("programArrow" + indexProgramCurrArrowRow);
+            arrowRow.textContent = "";
+            indexProgramCurrArrowRow++;
+            programCurrentRow = "programRow" + indexProgramCurrArrowRow;
         }
     },
     HALT: function() { //Bartek
