@@ -179,6 +179,7 @@ function addBtnMemory(){
 function addArrow(){
     const row = document.getElementById(programCurrentRow);
     row.cells[0].textContent = "⇒";
+    row.scrollIntoView({behavior:"smooth",block:"center"});
 }
 
 const programTable = document.getElementById("ProgramTable");
